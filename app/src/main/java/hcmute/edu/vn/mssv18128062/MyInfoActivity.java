@@ -8,6 +8,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
@@ -18,6 +19,7 @@ import java.io.IOException;
 public class MyInfoActivity extends AppCompatActivity {
 
 
+    ImageView imageView;
     ImageButton btnImg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +27,8 @@ public class MyInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_info);
 
 
-        btnImg = (ImageButton)findViewById(R.id.img);
+        imageView = (ImageView)findViewById(R.id.img);
+        btnImg = (ImageButton)findViewById(R.id.btnimg);
 
         btnImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +51,7 @@ public class MyInfoActivity extends AppCompatActivity {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
                 //Bitmap img = rotateImage(bitmap, 360);
                 //img = rotateImage(img, 90);
-                btnImg.setImageBitmap(bitmap);
+                imageView.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
             }
