@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="80dp"
+    tools:context=".MainActivity"
+    android:weightSum="3"
+    android:background="@color/teal_700"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1"
+
+        android:weightSum="3">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Đăng nhập"
+            android:textAllCaps="true"
+            android:textSize="50sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <EditText
+            android:id="@+id/tendangnhap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Tên đăng nhập"
+            android:textColor="@color/hint_edittext"
+            android:textColorHint="@color/hint_edittext"
+            android:paddingLeft="20dp"
+            android:background="@drawable/boder_edittext"></EditText>
+    </LinearLayout>
+    <LinearLayout
+        android:paddingTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:weightSum="3">
+
+        <EditText
+            android:id="@+id/matkhau"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Mật khẩu"
+            android:textColor="@color/hint_edittext"
+            android:textColorHint="@color/hint_edittext"
+            android:paddingLeft="20dp"
+            android:ems="15"
+            android:tooltipText="Mật khẩu dưới 15 ký tự"
+            android:inputType="textPassword"
+            android:background="@drawable/boder_edittext"></EditText>
+        <TextView
+            android:id="@+id/txtForgotPass"
+            android:paddingTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="20dp"
+            android:text="Quên mật khẩu?"
+            android:textColor="@color/white"
+            android:textSize="15sp"></TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:weightSum="3">
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Đăng nhập"
+                android:layout_weight="1"
+                android:textColor="@color/teal_700"
+                android:background="@drawable/boder_edittext"
+                android:textSize="20dp"></Button>
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/sign_in_button"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txtSingUp"
+                android:layout_width="match_parent"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:textAllCaps="true"
+                android:layout_height="wrap_content"
+                android:text="Đăng ký"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:layout_weight="1"></TextView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
