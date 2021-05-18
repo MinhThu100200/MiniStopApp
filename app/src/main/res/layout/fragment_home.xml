@@ -6,9 +6,21 @@
     tools:context=".HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:background="@color/teal_700"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <SearchView
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:background="@drawable/boder_edittext"
+            android:queryHint="Tên đường..."
+            android:iconifiedByDefault="false"
+            ></SearchView>
+    </LinearLayout>
+
 
 </FrameLayout>

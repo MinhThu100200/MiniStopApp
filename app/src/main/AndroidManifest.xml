@@ -63,6 +63,11 @@
             android:theme="@style/noTitle"></activity>
 
         <activity android:name=".MyInfoActivity" android:theme="@style/noTitle"/>
+
+        <activity
+            android:name=".CartActivity"></activity>
+        <activity
+            android:name=".NotificationActivity"></activity>
     </application>
 
 </manifest>

@@ -22,7 +22,7 @@
             android:id="@+id/notification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="180dp"
+            android:layout_marginLeft="135dp"
             android:layout_marginRight="5dp"
             android:tint="@color/white"
             android:background="@android:color/transparent"
@@ -37,6 +37,16 @@
             android:tint="@color/white"
             android:background="@android:color/transparent"
             android:src="@drawable/person"></ImageButton>
+
+        <ImageButton
+            android:id="@+id/cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="10dp"
+            android:tint="@color/white"
+            android:background="@android:color/transparent"
+            android:src="@drawable/cart"></ImageButton>
 
     </LinearLayout>
 

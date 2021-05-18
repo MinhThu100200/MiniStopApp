@@ -1,5 +1,6 @@
 package hcmute.edu.vn.mssv18128062;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ public class HomePageActivity extends AppCompatActivity {
     TextView textView;
     Toolbar toolbar;
     ImageButton info;
+    ImageButton cart;
+    ImageButton notification;
     BottomNavigationView bottomNavigationView;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -32,12 +35,36 @@ public class HomePageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hompage);
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(selectedListener);
+        //
         textView = (TextView)findViewById(R.id.titleFrag);
         textView.setText("Home");
         HomeFragment fragment = new HomeFragment();
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.container,fragment,"");
         fragmentTransaction.commit();
+        //
+
+        cart = (ImageButton)findViewById(R.id.cart);
+        cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new  Intent(getBaseContext(), CartActivity.class);
+                startActivity(intent);
+            }
+        });
+        //
+
+        notification = (ImageButton)findViewById(R.id.notification);
+        notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new  Intent(getBaseContext(), NotificationActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //
+
         info = (ImageButton)findViewById(R.id.profile);
         info.setOnClickListener(new View.OnClickListener() {
             @Override
