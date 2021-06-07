@@ -2,19 +2,43 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ImageView
-        android:layout_width="90dp"
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:padding="10dp"
-        android:layout_height="90dp"
-        android:id="@+id/imageViewCustome"
-        ></ImageView>
-    <TextView
-        android:id="@+id/address"
-        android:layout_width="280dp"
-        android:padding="10dp"
-        android:layout_height="90dp"
-        android:text="kimbap"
-        android:textSize="15dp"
-        ></TextView>
+        android:background="@drawable/border_listview">
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/imageViewCustome"
+            ></ImageView>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="25dp"
+                android:text="Mint Food"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:id="@+id/nameStore"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                ></TextView>
+            <TextView
+                android:layout_below="@id/nameStore"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="15dp"
+                android:text="kimpap"
+                android:id="@+id/address"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
 
 </LinearLayout>

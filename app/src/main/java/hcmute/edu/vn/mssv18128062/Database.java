@@ -128,14 +128,13 @@ public class Database extends SQLiteOpenHelper {
 
     //------------------------------------------------------------------------------------------------
     //insertUser
-    public void insertCategory(String name, byte[] picture){
+    public void insertCategory(String name){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sql = "INSERT INTO CATEGORY VALUES(NULL, ?, ?)";
+        String sql = "INSERT INTO CATEGORY VALUES(NULL, ?)";
         SQLiteStatement statement = db.compileStatement(sql);
         statement.clearBindings();
 
         statement.bindString(1, name);
-        statement.bindBlob(2, picture);
 
         statement.executeInsert();
     }

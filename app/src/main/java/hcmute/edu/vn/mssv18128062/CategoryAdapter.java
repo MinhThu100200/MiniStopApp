@@ -3,21 +3,20 @@ package hcmute.edu.vn.mssv18128062;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class CategoryAdapter extends ArrayAdapter {
 
+    private Integer imgId[] = {R.drawable.spicy_food, R.drawable.ch};
     List<Category> categoryList;
     public CategoryAdapter(Context context, int resource, ArrayList<Category>categoryArrayList) {
         super(context, resource);
@@ -58,12 +57,16 @@ public class CategoryAdapter extends ArrayAdapter {
             holder = (CategoryAdapter.ViewHolder) convertView.getTag();
         }
 
-        Address addressStore = (Address)this.getItem(position);
-        holder.txtNameCategory.setText(addressStore.getDescription());
 
-        byte[] image = addressStore.get_picture();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-        holder.imageViewCategory.setImageBitmap(bitmap);
+        Category addressStore = (Category) this.getItem(position);
+
+        int a = addressStore.get_picture();
+        int b = R.drawable.spicy_food;
+        holder.imageViewCategory.setImageResource(addressStore.get_picture());
+        holder.txtNameCategory.setText(addressStore.getName());
+
+
+
         return convertView;
     }
     //filter

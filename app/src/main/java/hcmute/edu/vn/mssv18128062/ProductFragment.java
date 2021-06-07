@@ -1,12 +1,23 @@
 package hcmute.edu.vn.mssv18128062;
 
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.SearchView;
+
+import java.util.ArrayList;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,6 +57,12 @@ public class ProductFragment extends Fragment {
         return fragment;
     }
 
+    private Database db;
+    private SQLiteDatabase sqLiteDatabase;
+    ListView lvCategory;
+    ArrayList<Category> arrayCategory;
+    CategoryAdapter categoryAdapter;
+    Intent intent;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +76,49 @@ public class ProductFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_product, container, false);
+        lvCategory = (ListView)rootView.findViewById(R.id.lvCategory);
+        db = new Database(getContext());
+        sqLiteDatabase = db.getReadableDatabase();
+        arrayCategory = new ArrayList<>();
+        initCategory();
+        categoryAdapter = new CategoryAdapter(getContext(), R.layout.layout_custome_category, arrayCategory);
+
+        lvCategory.setAdapter(categoryAdapter);
+
+        lvCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                intent = new Intent(getContext(),FoodActivity.class);
+                intent.putExtra("position", position);
+                startActivity(intent);
+            }
+        });
+
+        return rootView;
+    }
+
+
+
+    private void initCategory(){
+
+       // int rh=this.getResources().getIdentifier("ic_launcher", "drawable", "hcmute.edu.vn.mssv18128062");
+        Cursor dataCategory = db.GetData("SELECT * FROM CATEGORY");
+
+
+        while (dataCategory.moveToNext()){
+            if(dataCategory.getString(1).equals("Kem"))
+            {
+                arrayCategory.add(new Category(dataCategory.getInt(0),
+                        dataCategory.getString(1), R.drawable.spicy_food));
+            }
+            else if(dataCategory.getString(1).equals("Mỳ cay"))
+            {
+                arrayCategory.add(new Category(dataCategory.getInt(0),
+                        dataCategory.getString(1), R.drawable.spicy));
+            }
+
+        }
+
     }
 }

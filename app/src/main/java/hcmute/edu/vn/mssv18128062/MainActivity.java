@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         db.QueryData("CREATE TABLE IF NOT EXISTS USER(ID INTEGER PRIMARY KEY AUTOINCREMENT, USERNAME TEXT, " +
                 "PASSWORD TEXT, EMAIL TEXT, ROLE INTEGER)");
         //db.QueryData("INSERT INTO USER VALUES(NULL, 'mint', '12345', '123456'," + 1 +")");
-        db.QueryData("CREATE TABLE IF NOT EXISTS CATEGORY( ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, PICTURE BLOB)");
+        db.QueryData("CREATE TABLE IF NOT EXISTS CATEGORY( ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT )");
         db.QueryData("CREATE TABLE IF NOT EXISTS ADDRESS( ID INTEGER PRIMARY KEY AUTOINCREMENT, DESCRIPTION TEXT, PICTURE BLOB)");
 
         BitmapDrawable bitmapDrawable = (BitmapDrawable) ch.getDrawable();
@@ -61,7 +61,9 @@ public class MainActivity extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArray);
         byte [] img = byteArray.toByteArray();
 
-        //db.insertAddress("aaaaaaaaa", img);
+        //db.insertAddress("2/5 đường 68 phường Hiệp Phú Quận 9 tp.HCM", img);
+        //db.insertCategory("Mỳ cay");
+        //db.insertCategory("Mỳ cay");
         // Inserting users
         Log.d("Insert: ", "Inserting ..");
         //db.addUser(new User("Ravi", "1234", "12345", 1));

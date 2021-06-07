@@ -27,7 +27,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyProject">
 
-
         <activity
             android:name=".MainActivity"
             android:label="@string/activity_login"
@@ -40,13 +39,13 @@
         </activity>
         <activity
             android:name=".SignUpActivity"
-            android:theme="@style/noTitle"></activity>
+            android:theme="@style/noTitle" />
         <activity
             android:name=".ForgotPassActivity"
-            android:theme="@style/noTitle"></activity>
+            android:theme="@style/noTitle" />
         <activity
             android:name=".VerifyEmailActivity"
-            android:theme="@style/noTitle"></activity>
+            android:theme="@style/noTitle" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -60,14 +59,14 @@
 
         <activity
             android:name=".HomePageActivity"
-            android:theme="@style/noTitle"></activity>
-
-        <activity android:name=".MyInfoActivity" android:theme="@style/noTitle"/>
-
+            android:theme="@style/noTitle" />
         <activity
-            android:name=".CartActivity"></activity>
-        <activity
-            android:name=".NotificationActivity"></activity>
+            android:name=".MyInfoActivity"
+            android:theme="@style/noTitle" />
+        <activity android:name=".CartActivity" />
+        <activity android:name=".NotificationActivity" />
+        <activity android:name=".FoodActivity">
+        </activity>
     </application>
 
 </manifest>
