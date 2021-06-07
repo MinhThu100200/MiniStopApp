@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="90dp"
+        android:padding="10dp"
+        android:layout_height="90dp"
+        android:id="@+id/imageViewCustome"
+        ></ImageView>
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="280dp"
+        android:padding="10dp"
+        android:layout_height="90dp"
+        android:text="kimbap"
+        android:textSize="15dp"
+        ></TextView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

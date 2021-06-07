@@ -1,39 +1,36 @@
 package hcmute.edu.vn.mssv18128062;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class AddressAdapter extends ArrayAdapter {
+public class CategoryAdapter extends ArrayAdapter {
 
-
-    List<Address> mlist;
-    public AddressAdapter(Context context, int resource, ArrayList<Address> arrayAddress) {
+    List<Category> categoryList;
+    public CategoryAdapter(Context context, int resource, ArrayList<Category>categoryArrayList) {
         super(context, resource);
-        mlist = arrayAddress;
+        categoryList = categoryArrayList;
     }
-
     @Override
     public int getCount() {
-        return mlist.size();
+        return categoryList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mlist.get(position);
+        return categoryList.get(position);
     }
 
     @Override
@@ -41,32 +38,32 @@ public class AddressAdapter extends ArrayAdapter {
         return 0;
     }
 
-    class ViewHolder{
-        TextView txtAdrress;
-        ImageView imageViewFood;
+    private class ViewHolder{
+        TextView txtNameCategory;
+        ImageView imageViewCategory;
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
+        CategoryAdapter.ViewHolder holder;
         if(convertView == null)
         {
-            holder = new ViewHolder();
+            holder = new CategoryAdapter.ViewHolder();
             LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.layout_custome, parent, false);
-            holder.txtAdrress = (TextView) convertView.findViewById(R.id.address);
-            holder.imageViewFood = (ImageView) convertView.findViewById(R.id.imageViewCustome);
+            convertView = inflater.inflate(R.layout.layout_custome_category, parent, false);
+            holder.txtNameCategory = (TextView) convertView.findViewById(R.id.nameFood);
+            holder.imageViewCategory = (ImageView) convertView.findViewById(R.id.imageFood);
 
             convertView.setTag(holder);
         }else{
-            holder = (ViewHolder) convertView.getTag();
+            holder = (CategoryAdapter.ViewHolder) convertView.getTag();
         }
 
         Address addressStore = (Address)this.getItem(position);
-        holder.txtAdrress.setText(addressStore.getDescription());
+        holder.txtNameCategory.setText(addressStore.getDescription());
 
         byte[] image = addressStore.get_picture();
         Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-        holder.imageViewFood.setImageBitmap(bitmap);
+        holder.imageViewCategory.setImageBitmap(bitmap);
         return convertView;
     }
     //filter
@@ -80,19 +77,20 @@ public class AddressAdapter extends ArrayAdapter {
 
 
         }else {
-            List<Address> filter = new ArrayList<>();
+            List<Category> filter = new ArrayList<>();
 
-            for(Address adr: mlist){
+            for(Category adr: categoryList){
                 //List<Address> mlist = new ArrayList<>();
-                if(adr.getDescription().toLowerCase(Locale.getDefault()).contains(charText)){
+                if(adr.getName().toLowerCase(Locale.getDefault()).contains(charText)){
                     filter.add(adr);
                 }
             }
-            mlist.clear();
-            mlist.addAll(filter);
+            categoryList.clear();
+            categoryList.addAll(filter);
         }
         notifyDataSetChanged();
         //mlist.clear();
     }
 
 }
+

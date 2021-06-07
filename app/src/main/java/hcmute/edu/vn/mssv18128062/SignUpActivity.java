@@ -46,7 +46,7 @@ public class SignUpActivity extends AppCompatActivity {
                 finish();
             }
         });
-//choose photo
+        //choose photo
         btnChoose.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -57,7 +57,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-//take photo
+        //take photo
         btnTakePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

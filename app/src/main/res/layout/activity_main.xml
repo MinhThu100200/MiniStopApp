@@ -110,6 +110,11 @@
         </LinearLayout>
 
     </LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ch"
+        android:src="@drawable/ch"></ImageView>
 
 
 </LinearLayout>
