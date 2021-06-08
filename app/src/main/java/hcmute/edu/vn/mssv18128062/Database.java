@@ -176,25 +176,18 @@ public class Database extends SQLiteOpenHelper {
     }
     //-----------------------------------------------------------------------------------------------
     //CREATE PRODUCT
-    public void createProduct(SQLiteDatabase db)
-    {
-        //CREATE USERTABLE
-        String CREATE_USERS_TABLE = "CREATE TABLE PRODUCT( ID INTEGER PRIMARY KEY, NAME TEXT, PRICE FLOAT, DESCRIPTION TEXT, PICTURE BLOB, ID_CATEGORY INTEGER)";
-        db.execSQL(CREATE_USERS_TABLE);
-    }
 
     //insertUser
-    public void insertProduct(String name, float price, String description, byte[] picture, int idCategory){
+    public void insertProduct(String name, float price, String description, int idCategory){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sql = "INSERT INTO PRODUCT VALUES(NULL, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO PRODUCT VALUES(NULL, ?, ?, ?, ?)";
         SQLiteStatement statement = db.compileStatement(sql);
         statement.clearBindings();
 
         statement.bindString(1, name);
         statement.bindDouble(2, price);
         statement.bindString(3, description);
-        statement.bindBlob(4, picture);
-        statement.bindDouble(5, idCategory);
+        statement.bindDouble(4, idCategory);
 
         statement.executeInsert();
     }
@@ -216,7 +209,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
     // Deleting single user
-    public void deleteUser(int id) {
+    public void deleteProdcut(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         String sql = "DELETE FROM PRODUCT WHERE ID=?";
         SQLiteStatement statement = db.compileStatement(sql);
@@ -224,6 +217,23 @@ public class Database extends SQLiteOpenHelper {
 
         statement.bindDouble(1, id);
         statement.executeUpdateDelete();
+    }
+
+    public ArrayList<Product> getProductByCategory(int id) {
+        ArrayList<Product> productArrayList= new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor dataFood = db.query("PRODUCT", new String[] { "ID",
+                        "NAME", "PRICE", "DESCRIPTION", "ID_CATEGORY" }, "ID_CATEGORY" + "=?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
+
+        while (dataFood.moveToNext()){
+            productArrayList.add(new Product(dataFood.getInt(0),
+                    dataFood.getString(1), dataFood.getInt(2),
+                    dataFood.getString(3), R.drawable.spicy, dataFood.getInt(4)));
+        }
+        // return user
+        return productArrayList;
     }
 
     // Getting users Count

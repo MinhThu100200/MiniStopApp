@@ -74,12 +74,7 @@ public class AddressAdapter extends ArrayAdapter {
     {
 
         charText = charText.toLowerCase(Locale.getDefault());
-
-        if(charText.length() == 0)
-        {
-
-
-        }else {
+       if (charText.length() != 0){
             List<Address> filter = new ArrayList<>();
 
             for(Address adr: mlist){

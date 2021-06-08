@@ -6,7 +6,7 @@
     <item
         android:id="@+id/search"
         android:icon="@drawable/ic_baseline_search_24"
-        android:title="Tên đường..."
+        android:title="Tên món..."
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="android.widget.SearchView" />
 </menu>

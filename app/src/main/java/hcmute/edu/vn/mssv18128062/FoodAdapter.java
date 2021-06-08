@@ -1,35 +1,36 @@
 package hcmute.edu.vn.mssv18128062;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class CategoryAdapter extends ArrayAdapter {
+public class FoodAdapter extends ArrayAdapter {
 
-   // private Integer imgId[] = {R.drawable.spicy_food, R.drawable.ch};
-    List<Category> categoryList;
-    public CategoryAdapter(Context context, int resource, ArrayList<Category>categoryArrayList) {
+    List<Product> foodList;
+
+    public FoodAdapter(@NonNull Context context, int resource, ArrayList<Product>productArrayList) {
         super(context, resource);
-        categoryList = categoryArrayList;
+        foodList = productArrayList;
+
     }
     @Override
     public int getCount() {
-        return categoryList.size();
+        return foodList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return categoryList.get(position);
+        return foodList.get(position);
     }
 
     @Override
@@ -43,22 +44,22 @@ public class CategoryAdapter extends ArrayAdapter {
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        CategoryAdapter.ViewHolder holder;
+        FoodAdapter.ViewHolder holder;
         if(convertView == null)
         {
-            holder = new CategoryAdapter.ViewHolder();
+            holder = new FoodAdapter.ViewHolder();
             LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.layout_custome_category, parent, false);
+            convertView = inflater.inflate(R.layout.layout_custome_category, null);
             holder.txtNameCategory = (TextView) convertView.findViewById(R.id.nameFood);
             holder.imageViewCategory = (ImageView) convertView.findViewById(R.id.imageFood);
 
             convertView.setTag(holder);
         }else{
-            holder = (CategoryAdapter.ViewHolder) convertView.getTag();
+            holder = (FoodAdapter.ViewHolder) convertView.getTag();
         }
 
 
-        Category addressStore = (Category) this.getItem(position);
+        Product addressStore = (Product) this.getItem(position);
 
 
         holder.imageViewCategory.setImageResource(addressStore.get_picture());
@@ -79,20 +80,19 @@ public class CategoryAdapter extends ArrayAdapter {
 
 
         }else {
-            List<Category> filter = new ArrayList<>();
+            List<Product> filter = new ArrayList<>();
 
-            for(Category adr: categoryList){
+            for(Product adr: foodList){
                 //List<Address> mlist = new ArrayList<>();
                 if(adr.getName().toLowerCase(Locale.getDefault()).contains(charText)){
                     filter.add(adr);
                 }
             }
-            categoryList.clear();
-            categoryList.addAll(filter);
+            foodList.clear();
+            foodList.addAll(filter);
         }
         notifyDataSetChanged();
         //mlist.clear();
     }
 
 }
-

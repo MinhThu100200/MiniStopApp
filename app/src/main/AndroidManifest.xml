@@ -65,7 +65,8 @@
             android:theme="@style/noTitle" />
         <activity android:name=".CartActivity" />
         <activity android:name=".NotificationActivity" />
-        <activity android:name=".FoodActivity">
+        <activity android:name=".FoodActivity"
+            android:theme="@style/noTitle">
         </activity>
     </application>
 
