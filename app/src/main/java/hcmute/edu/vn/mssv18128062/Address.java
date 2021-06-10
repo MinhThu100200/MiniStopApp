@@ -3,25 +3,25 @@ package hcmute.edu.vn.mssv18128062;
 public class Address {
     int _id;
     String _description;
-    byte[] _picture;
+    int _picture;
 
-    public void set_picture(byte[] _picture) {
+    public void set_picture(int _picture) {
         this._picture = _picture;
     }
 
-    public byte[] get_picture() {
+    public int get_picture() {
         return _picture;
     }
 
     public Address(){   }
-    public Address(int id, String _description, byte[] _picture){
+    public Address(int id, String _description, int _picture){
         this._id = id;
         this._description = _description;
         this._picture = _picture;
 
     }
 
-    public Address(String _description, byte[] _picture){
+    public Address(String _description, int _picture){
         this._picture = _picture;
         this._description = _description;
 

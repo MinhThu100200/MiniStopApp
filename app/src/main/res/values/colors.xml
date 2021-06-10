@@ -8,4 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="hint_edittext">#BDBDBA</color>
+    <color name="blue_light">#00BCD4</color>
+    <color name="green_dark">#4CAF50</color>
+    <color name="red_light">#F43333</color>
+    <color name="organe_light">#FF9800</color>
 </resources>

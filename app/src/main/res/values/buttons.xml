@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <array name="icons">
+        <item>@drawable/ic_baseline_home_24</item>
+        <item>@drawable/ic_baseline_star_rate_24</item>
+        <item>@drawable/ic_baseline_add_shopping_cart_24</item>
+
+    </array>
+
+
+    <array name="colors">
+
+        <item>@color/blue_light</item>
+        <item>@color/red_light</item>
+        <item>@color/purple_200</item>
+
+    </array>
+</resources>

@@ -61,7 +61,7 @@ public class FoodAdapter extends ArrayAdapter {
 
         Product addressStore = (Product) this.getItem(position);
 
-
+        int a = addressStore.get_picture();
         holder.imageViewCategory.setImageResource(addressStore.get_picture());
         holder.txtNameCategory.setText(addressStore.getName());
 
@@ -72,7 +72,6 @@ public class FoodAdapter extends ArrayAdapter {
     //filter
     public void filter(String charText)
     {
-
         charText = charText.toLowerCase(Locale.getDefault());
 
         if(charText.length() == 0)
@@ -81,7 +80,6 @@ public class FoodAdapter extends ArrayAdapter {
 
         }else {
             List<Product> filter = new ArrayList<>();
-
             for(Product adr: foodList){
                 //List<Address> mlist = new ArrayList<>();
                 if(adr.getName().toLowerCase(Locale.getDefault()).contains(charText)){

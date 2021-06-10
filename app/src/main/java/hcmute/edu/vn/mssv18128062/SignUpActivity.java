@@ -6,6 +6,11 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.Shader;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -38,6 +43,8 @@ public class SignUpActivity extends AppCompatActivity {
         btnTakePhoto = (Button)findViewById(R.id.btnTakePhoto);
         imageView = (ImageView)findViewById(R.id.imageView);
 
+        //int iamge = R.drawable.ch;
+        //imageView.setImageResource(iamge);
         txtLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,6 +98,13 @@ public class SignUpActivity extends AppCompatActivity {
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
                         //Bitmap img = rotateImage(bitmap, 360);
                         //img = rotateImage(img, 90);
+                       // Bitmap imgRound = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), bitmap.getConfig());
+                      //  Canvas canvas = new Canvas(imgRound);
+                      //  Paint paint = new Paint();
+                       // paint.setAntiAlias(true);
+                      //  paint.setShader(new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
+                      //  canvas.drawRoundRect(new RectF(100, 100, bitmap.getWidth(), bitmap.getHeight()), 100, 100, paint);
+                      //  imageView.setImageBitmap(imgRound);
                         imageView.setImageBitmap(bitmap);
                     } catch (IOException e) {
                         e.printStackTrace();

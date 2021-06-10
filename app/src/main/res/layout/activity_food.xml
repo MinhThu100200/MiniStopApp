@@ -10,34 +10,22 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar_food"></include>
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_below="@id/toolbar"
-            android:background="@color/teal_700"
-            android:id="@+id/search">
-            <EditText
-                android:layout_width="250dp"
-                android:layout_height="50dp"
-                android:hint="Tên món..."
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="50dp"
-                android:textSize="20dp"
-                android:padding="5dp"
-                android:paddingTop="10dp"
-                android:paddingEnd="10dp"
-                android:background="@drawable/boder_edittext"
-                android:imeOptions="actionSearch"
-                android:layout_below="@id/toolbar">
-            </EditText>
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_search_24"
-                android:background="@android:color/transparent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="27dp"
-                ></ImageButton>
+        android:background="@color/teal_700"
+        android:layout_width="match_parent"
+        android:layout_below="@id/toolbar"
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:id="@id/search"
+        android:orientation="horizontal">
 
+        <SearchView
+            android:id="@+id/searchFood"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:background="@drawable/boder_edittext"
+            android:queryHint="Tên món..."
+            android:iconifiedByDefault="false"
+            ></SearchView>
         </LinearLayout>
         <ListView
             android:id="@+id/lvFood"

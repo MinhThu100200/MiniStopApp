@@ -93,7 +93,7 @@ public class HomeFragment extends Fragment{
         while (dataAddressStore.moveToNext()){
             arrayAddress.add(new Address(dataAddressStore.getInt(0),
                     dataAddressStore.getString(1),
-                    dataAddressStore.getBlob(2)
+                    dataAddressStore.getInt(2)
             ));
         }
         addressAdapter = new AddressAdapter(getContext(), R.layout.layout_custome, arrayAddress);
@@ -117,7 +117,7 @@ public class HomeFragment extends Fragment{
                     while (dataAddressStore.moveToNext()){
                         arrayAddress.add(new Address(dataAddressStore.getInt(0),
                                 dataAddressStore.getString(1),
-                                dataAddressStore.getBlob(2)
+                                dataAddressStore.getInt(2)
                         ));
                     }
                     addressAdapter.clear();

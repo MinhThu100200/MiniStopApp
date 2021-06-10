@@ -23,7 +23,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class HomePageActivity extends AppCompatActivity {
 
     TextView textView;
-    Toolbar toolbar;
+    //Toolbar toolbar;
     ImageButton info;
     ImageButton cart;
     ImageButton notification;
@@ -43,7 +43,14 @@ public class HomePageActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.container,fragment,"");
         fragmentTransaction.commit();
         //
+        Intent intent = getIntent();
 
+        if(getIntent().getIntExtra("flag", -1) != -1)
+        {
+            bottomNavigationView.setSelectedItemId(R.id.navigation_products);
+            //bottomNavigationView.setOnNavigationItemSelectedListener(R.id.navigation_products);
+        }
+        //
         cart = (ImageButton)findViewById(R.id.cart);
         cart.setOnClickListener(new View.OnClickListener() {
             @Override

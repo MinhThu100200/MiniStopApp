@@ -63,10 +63,11 @@ public class AddressAdapter extends ArrayAdapter {
 
         Address addressStore = (Address)this.getItem(position);
         holder.txtAdrress.setText(addressStore.getDescription());
-
-        byte[] image = addressStore.get_picture();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-        holder.imageViewFood.setImageBitmap(bitmap);
+        //int imgId = addressStore.get_picture();
+        holder.imageViewFood.setImageResource(addressStore.get_picture());
+        //byte[] image = addressStore.get_picture();
+        ///Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+        //holder.imageViewFood.setImageBitmap(bitmap);
         return convertView;
     }
     //filter

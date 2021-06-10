@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -89,6 +90,7 @@ public class ProductFragment extends Fragment {
         lvCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 intent = new Intent(getContext(),FoodActivity.class);
                 intent.putExtra("position", position);
                 startActivity(intent);
@@ -102,21 +104,12 @@ public class ProductFragment extends Fragment {
 
     private void initCategory(){
 
-       // int rh=this.getResources().getIdentifier("ic_launcher", "drawable", "hcmute.edu.vn.mssv18128062");
+
         Cursor dataCategory = db.GetData("SELECT * FROM CATEGORY");
 
-
         while (dataCategory.moveToNext()){
-            if(dataCategory.getString(1).equals("Kem"))
-            {
-                arrayCategory.add(new Category(dataCategory.getInt(0),
-                        dataCategory.getString(1), R.drawable.spicy_food));
-            }
-            else if(dataCategory.getString(1).equals("Mỳ cay"))
-            {
-                arrayCategory.add(new Category(dataCategory.getInt(0),
-                        dataCategory.getString(1), R.drawable.spicy));
-            }
+            arrayCategory.add(new Category(dataCategory.getInt(0),
+                    dataCategory.getString(1), dataCategory.getInt(2)));
 
         }
 

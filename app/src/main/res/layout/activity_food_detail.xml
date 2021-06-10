@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FoodDetailActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_food"></include>
+    <ImageView
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_height="220dp"
+        android:layout_below="@id/toolbar"
+        android:id="@+id/imgFood"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingLeft="10dp"
+        android:textSize="40dp"
+        android:paddingRight="10dp"
+        android:layout_below="@id/imgFood"
+        android:id="@+id/nameFood"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/nameFood"
+        android:paddingLeft="10dp"
+        android:textSize="30dp"
+        android:paddingRight="10dp"
+        android:id="@+id/priceFood"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@id/priceFood"
+        android:paddingRight="10dp"
+        android:id="@+id/description"
+        android:paddingLeft="10dp"
+        />
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:id="@+id/lvRate"
+        android:layout_below="@id/description"/>
+
+    <com.ramotion.circlemenu.CircleMenuView android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:id="@+id/circleMenu"
+        app:icon_color="@color/white"
+        app:distance="60dp"
+        android:layout_marginTop="140dp"
+        android:paddingLeft="20dp"
+        android:layout_marginLeft="120dp"
+        app:button_icons="@array/icons"
+        app:button_colors="@array/colors"/>
+    
+
+</RelativeLayout>

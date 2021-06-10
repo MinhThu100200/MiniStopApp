@@ -13,23 +13,24 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/btnback"
             android:src="@drawable/ic_baseline_arrow_back_24"
             android:background="@android:color/transparent"
             android:layout_marginRight="10dp"/>
         <TextView
-            android:id="@+id/titleFrag"
+            android:id="@+id/titleFood"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="20dp"
             android:layout_marginLeft="80dp"
-            android:text="@string/app_name"></TextView>
+            android:text=""></TextView>
         <ImageButton
             android:id="@+id/notification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="30dp"
             android:layout_marginRight="5dp"
             android:tint="@color/white"
             android:background="@android:color/transparent"

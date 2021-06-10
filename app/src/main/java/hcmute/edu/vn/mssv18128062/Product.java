@@ -7,13 +7,14 @@ public class Product {
     String _name;
     double _price;
     String _description;
-    Integer _picture;
     int _idcategory;
+    int _picture;
+
 
 
 
     public Product(){   }
-    public Product(int id, String _name, double _price, String _description, Integer _picture, int _idcategory){
+    public Product(int id, String _name, double _price, String _description, int _idcategory, int _picture){
         this._id = id;
         this._name = _name;
         this._picture = _picture;
@@ -22,7 +23,7 @@ public class Product {
         this._price = _price;
     }
 
-    public Product(String _name, double _price, String _description, Integer _picture, int _idcategory){
+    public Product(String _name, double _price, String _description, int _idcategory, int _picture){
         this._name = _name;
         this._picture = _picture;
         this._description = _description;
@@ -57,15 +58,17 @@ public class Product {
 
     public void setDescription(String description){this._description = description;}
 
+    public int get_picture() {
+        return _picture;
+    }
+
+    public void set_picture(int _picture) {
+        this._picture = _picture;
+    }
+
     public int getIdCategory(){return this._idcategory;}
 
     public void setIdCategory(int idCategory){this._idcategory = idCategory; }
 
-    public Integer get_picture() {
-        return _picture;
-    }
 
-    public void set_picture(Integer _picture) {
-        this._picture = _picture;
-    }
 }

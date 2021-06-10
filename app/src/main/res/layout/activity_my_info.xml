@@ -54,11 +54,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="10/02/2000"
-            android:id="@+id/birthday"
+            android:text="mint"
+            android:id="@+id/username"
             android:background="@drawable/boder_edittext"
             android:layout_marginTop="10dp"
-            android:inputType="datetime"
+            android:inputType="text"
             android:paddingLeft="5dp"
             android:textColor="#A5A2A2"
             ></EditText>
@@ -72,25 +72,26 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="minhthuthum@gmail.com"
+            android:text="000000"
             android:textColor="#A5A2A2"
-            android:id="@+id/email"
+            android:id="@+id/password"
             android:background="@drawable/boder_edittext"
             android:layout_weight="1"
-            android:inputType="textEmailAddress"
+            android:inputType="textPassword"
             android:layout_marginTop="10dp"
             android:paddingLeft="5dp"/>
+
         <EditText
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#A5A2A2"
-            android:background="@drawable/boder_edittext"
-            android:paddingLeft="5dp"
             android:layout_marginTop="10dp"
-            android:text="0346279377"
             android:layout_weight="1"
-            android:inputType="phone"
-            android:id="@+id/number_phone"/>
+            android:background="@drawable/boder_edittext"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="5dp"
+            android:text="minthu@"
+            android:textColor="#A5A2A2" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -98,45 +99,20 @@
         android:orientation="vertical"
         android:layout_weight="1"
         android:weightSum="2">
-        <LinearLayout
+        <EditText
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:text="000000"
+            android:textColor="#A5A2A2"
+            android:id="@+id/phone"
+            android:background="@drawable/boder_edittext"
             android:layout_weight="1"
-            android:weightSum="3"
-            android:orientation="horizontal">
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Nữ"
-                android:checked="true"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:layout_weight="1"
-                android:id="@+id/female"></RadioButton>
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Nam"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:layout_weight="1"
-
-                android:id="@+id/male"
-                ></RadioButton>
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:layout_weight="1"
-                android:id="@+id/other"
-                android:textColor="@color/white"
-                android:text="Khác"></RadioButton>
-
-        </LinearLayout>
-
+            android:inputType="phone"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="5dp"/>
         <Button
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:background="@drawable/boder_button"

@@ -43,64 +43,31 @@ public class Database extends SQLiteOpenHelper {
         values.put("USERNAME", user.getUsername()); // Username
         values.put("PASSWORD", user.getPassword()); // Password
         values.put("EMAIL", user.getEmail()); //email
-        values.put("ROLE", user.getRole()); //role
-
+        values.put("NAME", user.get_name());
+        values.put("PHONE", user.get_phone_number());
+        values.put("POINT", user.get_point());
+        values.put("PICTURE", user.get_picture());
         // Inserting Row
         db.insert("USERS", null, values);
         //2nd argument is String containing nullColumnHack
         db.close(); // Closing database connection
     }
     // code to get the single user
-    User getUser(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query("USERS", new String[] { "ID",
-                        "USERNAME", "PASSWORD", "EMAIL", "ROLE" }, "ID" + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
 
-        User user = new User(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2), cursor.getString(3),
-                Integer.parseInt(cursor.getString(4)));
-        // return user
-        return user;
-    }
-    // code to get all users in a list view
-    public List<User> getAllUsers() {
-        List<User> userList = new ArrayList<User>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM USERS";
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                User user = new User();
-                user.setID(Integer.parseInt(cursor.getString(0)));
-                user.setUsername(cursor.getString(1));
-                user.setPassword(cursor.getString(2));
-                user.setEmail(cursor.getString(3));
-                user.setRole(Integer.parseInt(cursor.getString(4)));
-                // Adding user to list
-                userList.add(user);
-            } while (cursor.moveToNext());
-        }
-
-        // return user list
-        return userList;
-    }
     // code to update the single contact
     public int updateUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put("USERNAME", user.getUsername());
-        values.put("PASSWORD", user.getPassword());
-        values.put("EMAIL", user.getEmail());
-        values.put("ROLE", user.getRole());
+        values.put("USERNAME", user.getUsername()); // Username
+        values.put("PASSWORD", user.getPassword()); // Password
+        values.put("EMAIL", user.getEmail()); //email
+        values.put("NAME", user.get_name());
+        values.put("PHONE", user.get_phone_number());
+        values.put("POINT", user.get_point());
+        values.put("PICTURE", user.get_picture());
+
 
         // updating row
         return db.update("USERS", values, "ID" + " = ?",
@@ -128,32 +95,35 @@ public class Database extends SQLiteOpenHelper {
 
     //------------------------------------------------------------------------------------------------
     //insertUser
-    public void insertCategory(String name){
+    public void insertCategory(String name, int imgId){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sql = "INSERT INTO CATEGORY VALUES(NULL, ?)";
+        String sql = "INSERT INTO CATEGORY VALUES(NULL, ?, ?)";
         SQLiteStatement statement = db.compileStatement(sql);
         statement.clearBindings();
 
         statement.bindString(1, name);
+        statement.bindDouble(2, imgId);
 
         statement.executeInsert();
     }
 
-    // code to update the single contact
-    public void updateCategory(int id, String name, byte[] picture) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        String sql = "UPDATE CATEGORY SET NAME=?, PICTURE=? WHERE ID=?";
-        SQLiteStatement statement = db.compileStatement(sql);
-        statement.clearBindings();
+    public ArrayList<Category> getCategoryById(int id) {
+        ArrayList<Category> categoryArrayList= new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
 
-        statement.bindString(1, name);
-        statement.bindBlob(2, picture);
-        statement.bindDouble(3, id);
+        Cursor dataFood = db.query("CATEGORY", new String[] { "ID",
+                        "NAME", "IMAGE_ID" }, "ID" + "=?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
 
-        statement.executeUpdateDelete();
+        while (dataFood.moveToNext()){
+            categoryArrayList.add(new Category(dataFood.getInt(0),
+                    dataFood.getString(1), dataFood.getInt(2)
+                    ));
+        }
+        // return user
+        return categoryArrayList;
     }
-
-    // Deleting single user
+    // Deleting single
     public void deleteCategory(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         String sql = "DELETE FROM CATEGORY WHERE ID=?";
@@ -178,9 +148,9 @@ public class Database extends SQLiteOpenHelper {
     //CREATE PRODUCT
 
     //insertUser
-    public void insertProduct(String name, float price, String description, int idCategory){
+    public void insertProduct(String name, float price, String description, int idCategory, int igmId){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sql = "INSERT INTO PRODUCT VALUES(NULL, ?, ?, ?, ?)";
+        String sql = "INSERT INTO PRODUCT VALUES(NULL, ?, ?, ?, ?, ?)";
         SQLiteStatement statement = db.compileStatement(sql);
         statement.clearBindings();
 
@@ -188,28 +158,14 @@ public class Database extends SQLiteOpenHelper {
         statement.bindDouble(2, price);
         statement.bindString(3, description);
         statement.bindDouble(4, idCategory);
+        statement.bindDouble(5, igmId);
 
         statement.executeInsert();
     }
 
-    public void updateProduct(int id, String name, float price, String description, byte[] picture, int idCategory) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        String sql = "UPDATE PRODUCT SET NAME=?, PRICE=?, DESCRIPTION=?, PICTURE=?, ID_CATEGORY=? WHERE ID=?";
-        SQLiteStatement statement = db.compileStatement(sql);
-        statement.clearBindings();
-
-        statement.bindString(1, name);
-        statement.bindDouble(2, price);
-        statement.bindString(3, description);
-        statement.bindBlob(4, picture);
-        statement.bindDouble(5, idCategory);
-        statement.bindDouble(6, id);
-
-        statement.executeUpdateDelete();
-    }
 
     // Deleting single user
-    public void deleteProdcut(int id) {
+    public void deleteProduct(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         String sql = "DELETE FROM PRODUCT WHERE ID=?";
         SQLiteStatement statement = db.compileStatement(sql);
@@ -224,13 +180,13 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor dataFood = db.query("PRODUCT", new String[] { "ID",
-                        "NAME", "PRICE", "DESCRIPTION", "ID_CATEGORY" }, "ID_CATEGORY" + "=?",
+                        "NAME", "PRICE", "DESCRIPTION", "ID_CATEGORY", "IMAGE_ID" }, "ID_CATEGORY" + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
 
         while (dataFood.moveToNext()){
             productArrayList.add(new Product(dataFood.getInt(0),
                     dataFood.getString(1), dataFood.getInt(2),
-                    dataFood.getString(3), R.drawable.spicy, dataFood.getInt(4)));
+                    dataFood.getString(3), dataFood.getInt(4), dataFood.getInt(5)));
         }
         // return user
         return productArrayList;
@@ -248,14 +204,14 @@ public class Database extends SQLiteOpenHelper {
     }
     //------------------------------------------------------------------------------------------------------
     //insertUser
-    public void insertAddress(String description, byte[] picture){
+    public void insertAddress(String description, int picture){
         SQLiteDatabase db = this.getWritableDatabase();
         String sql = "INSERT INTO ADDRESS VALUES(NULL, ?, ?)";
         SQLiteStatement statement = db.compileStatement(sql);
         statement.clearBindings();
 
         statement.bindString(1, description);
-        statement.bindBlob(2, picture);
+        statement.bindDouble(2, picture);
 
         statement.executeInsert();
     }
