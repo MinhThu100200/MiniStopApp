@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:paddingLeft="10dp"
-        android:textSize="40dp"
+        android:textSize="30sp"
         android:paddingRight="10dp"
         android:layout_below="@id/imgFood"
         android:id="@+id/nameFood"/>
@@ -28,24 +28,39 @@
         android:layout_height="40dp"
         android:layout_below="@id/nameFood"
         android:paddingLeft="10dp"
-        android:textSize="30dp"
+        android:textSize="20sp"
+        android:textColor="@color/teal_700"
         android:paddingRight="10dp"
         android:id="@+id/priceFood"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="70dp"
         android:layout_below="@id/priceFood"
         android:paddingRight="10dp"
         android:id="@+id/description"
+        android:textSize="15sp"
         android:paddingLeft="10dp"
         />
-    <ListView
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/description"
         android:paddingRight="10dp"
+        android:gravity="center"
+        android:text="_______  Đánh giá và Nhận xét  _______"
+        android:textSize="20sp"
+        android:id="@+id/titleCmt"
+        android:paddingLeft="10dp"
+        />
+
+    <ListView
         android:id="@+id/lvRate"
-        android:layout_below="@id/description"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleCmt"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" />
 
     <com.ramotion.circlemenu.CircleMenuView android:layout_height="wrap_content"
         android:layout_width="300dp"

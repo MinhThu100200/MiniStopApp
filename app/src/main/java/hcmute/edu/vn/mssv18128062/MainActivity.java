@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView ch;
     public static Database db;
     SharedPreferences sharedPreferencesUser;
+    SharedPreferences sharedPreferencesCart;
     private GoogleSignInClient mGoogleSignInClient;
 
     @Override
@@ -63,26 +64,27 @@ public class MainActivity extends AppCompatActivity {
         db.QueryData("CREATE TABLE IF NOT EXISTS ADDRESS( ID INTEGER PRIMARY KEY AUTOINCREMENT, DESCRIPTION TEXT, IMAGE_ID INTEGER)");
         db.QueryData("CREATE TABLE IF NOT EXISTS PRODUCT( ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, PRICE FLOAT, DESCRIPTION TEXT, " +
                 "ID_CATEGORY INTEGER, IMAGE_ID INTEGER)");
-        db.QueryData("CREATE TABLE IF NOT EXISTS RATE( ID INTEGER PRIMARY KEY AUTOINCREMENT, ID_PRODUCT INTEGER, RATING FLOAT)");
-        db.QueryData("CREATE TABLE IF NOT EXISTS BOOKED( ID INTEGER PRIMARY KEY AUTOINCREMENT, DATE_ORDER REAL)");
+        db.QueryData("CREATE TABLE IF NOT EXISTS RATE( ID INTEGER PRIMARY KEY AUTOINCREMENT, ID_PRODUCT INTEGER, NAME TEXT, DATE_RATING TEXT, " +
+                "RATING FLOAT, CMT TEXT)");
+        db.QueryData("CREATE TABLE IF NOT EXISTS BOOKED( ID INTEGER PRIMARY KEY AUTOINCREMENT, DATE_ORDER TEXT)");
         db.QueryData("CREATE TABLE IF NOT EXISTS ORDERS( ID INTEGER PRIMARY KEY AUTOINCREMENT, ID_PRODUCT INTEGER, PRICE FLOAT, AMOUNT_PRODUCT INTEGER, " +
-             "ID_BOOKED INTEGER, DATE_ORDER REAL)");
+             "ID_BOOKED INTEGER, DATE_ORDER TEXT)");
 
 
 
-         db.insertAddress("2/5 đường 68 phường Hiệp Phú Quận 9 tp.Thủ Đức", R.drawable.ch1);
+        db.insertAddress("2/5 đường 68 phường Hiệp Phú Quận 9 tp.Thủ Đức", R.drawable.ch1);
         db.insertAddress("33 Lê Văn Việt phường Hiệp Phú quận 9 tp.Thủ Đức", R.drawable.ch2);
         db.insertAddress("90 Võ Văn Ngân phường Hiệp Phú quận Thủ Đức tp.Thủ Đức", R.drawable.ch3);
         db.insertAddress("88 Nguyễn Tri Phương phường 3 quận 6 tp.Trà Vinh", R.drawable.ch4);
         db.insertAddress("12 Nguyễn Đình Chiểu phường 3 quận 6 tp.Trà Vinh", R.drawable.ch5);
          //1
-         db.insertCategory("Mỳ cay", R.drawable.spicy);
+        db.insertCategory("Mỳ cay", R.drawable.spicy);
         //db.insertCategory("Mỳ cay");
-         db.insertProduct("Mỳ cay hải sản", 40000, "Hương vị đê mê cho tín đồ mỳ cay, với độ cay xé lưỡi sẽ kích thích vị giác của bạn", 1, R.drawable.spicy);
+        db.insertProduct("Mỳ cay hải sản", 40000, "Hương vị đê mê cho tín đồ mỳ cay, với độ cay xé lưỡi sẽ kích thích vị giác của bạn", 1, R.drawable.spicy);
          //2
-         db.insertCategory("Đồ uống", R.drawable.drink);
+        db.insertCategory("Đồ uống", R.drawable.drink);
         db.insertProduct("Nước cam", 30000, "Nước cam 100% cam tươi cung cấp vitamin C cho bạn khỏe mạnh", 2, R.drawable.organe);
-        db.insertProduct("CockTail Chanh", 50000, "Nếu bạn là một tín đồ cocktail thì không thể bỏ lỡ cocktail chanh mang hơi hướng, cách chế biến của Pháp.", 2, R.drawable.coktai_lemon);
+        db.insertProduct("Nước cam cà rốt", 50000, "Nước trái cây mix, xịn khỏi chê luôn đó nha..Thử nhanh nào khách iu ơi!", 2, R.drawable.organ_carrot);
         //3
         db.insertCategory("Cơm", R.drawable.com_ga);
         db.insertProduct("Cơm gà", 45000, "Cơm gà được chế biến từ những con gà vườn thịt rắn chắc và mạnh mẽ, sẽ làm cho bạn ghiền đó", 3, R.drawable.com_ga);
@@ -101,29 +103,28 @@ public class MainActivity extends AppCompatActivity {
         db.insertProduct("Chả chiên", 30000, "Nóng hỏi vừa thổi vừa ăn nè~", 7, R.drawable.cha_chien);
 
 
+        sharedPreferencesCart = getSharedPreferences("dataCart", MODE_PRIVATE);
+        String query = "SELECT * FROM PRODUCT";
+        int count = 0;
+        Cursor allProduct = db.GetData(query);
 
-        // Inserting users
-        Log.d("Insert: ", "Inserting ..");
-        //db.addUser(new User("Ravi", "1234", "12345", 1));
-        //db.addUser(new User("Nam", "1234", "12345", 1));
-        //userdao.insertUser("mint", "12345", "minhthuthum@gmail.com", 1);
-        Log.d("Reading: ", "Reading all contacts..");
-        //List<User> users = userdao.getAllUsers(db);
-
-        //for (User user : users) {
-            //String log = "Id: " + user.getID() + " ,Username: " + user.getUsername() + " ,Password: " +
-                    //user.getPassword() + " ,Email: " + user.getEmail() + " ,Role: " + user.getRole();
-            // Writing users to log
-            //Log.d("Name: ", log);
-        //}
-        //Cursor cursor = db.GetData("select * from Address");
-        //while (cursor.moveToNext())
-        //{
-          //  String name = cursor.getString(1);
-            //int id = cursor.getInt(0);
-            //Toast.makeText(this, "" + id, Toast.LENGTH_SHORT).show();
-            //Log.d("id", ""+id);
-        //}
+        while (allProduct.moveToNext())
+        {
+           if(sharedPreferencesCart.getInt("" + allProduct.getInt(0), -1) == allProduct.getInt(0))
+           {
+               break;
+           }
+           else
+           {
+               count++;
+           }
+        }
+        if(count == allProduct.getCount())
+        {
+            SharedPreferences.Editor editor = sharedPreferencesCart.edit();
+            editor.putInt("amountAllPro", 0);
+            editor.commit();
+        }
 
         txtSignUp = (TextView) findViewById(R.id.txtSingUp);
         txtFogotPass = (TextView) findViewById(R.id.txtForgotPass);

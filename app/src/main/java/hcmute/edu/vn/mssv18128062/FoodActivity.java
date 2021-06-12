@@ -71,7 +71,7 @@ public class FoodActivity extends AppCompatActivity {
         db = new Database(this);
         sqLiteDatabase = db.getReadableDatabase();
         productArrayList = db.getProductByCategory(positionCate + 1);
-        productAdapter = new FoodAdapter(this, R.layout.layout_custome_category, productArrayList);
+        productAdapter = new FoodAdapter(this, R.layout.layout_custom_food, productArrayList);
 
         lvFood.setAdapter(productAdapter);
         lvFood.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -140,8 +140,7 @@ public class FoodActivity extends AppCompatActivity {
                     productArrayList.clear();
                     productArrayList = db.getProductByCategory(positionCate + 1);
                     productArrayList.clear();
-                    productAdapter = new FoodAdapter(getApplicationContext(), R.layout.layout_custome_category, productArrayList);
-
+                    productAdapter = new FoodAdapter(getApplicationContext(), R.layout.layout_custom_food, productArrayList);
                 }
                 productAdapter.filter(newText);
                 //lvAddress.setAdapter(addressAdapter);

@@ -73,6 +73,16 @@ public class Database extends SQLiteOpenHelper {
         return db.update("USERS", values, "ID" + " = ?",
                 new String[] { String.valueOf(user.getID()) });
     }
+    public int updateUserPoint(User user) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("POINT", user.get_point());
+
+        // updating row
+        return db.update("USERS", values, "ID" + " = ?",
+                new String[] { String.valueOf(user.getID()) });
+    }
 
     // Deleting single user
     public void deleteUser(User user) {
@@ -191,6 +201,22 @@ public class Database extends SQLiteOpenHelper {
         // return user
         return productArrayList;
     }
+    Product getProduct(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor dataFood = db.query("PRODUCT", new String[] { "ID",
+                        "NAME", "PRICE", "DESCRIPTION", "ID_CATEGORY", "IMAGE_ID" }, "ID_CATEGORY" + "=?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
+
+
+            Product product = new Product(dataFood.getInt(0),
+                    dataFood.getString(1), dataFood.getDouble(2),
+                    dataFood.getString(3), dataFood.getInt(4), dataFood.getInt(5));
+
+        // return user
+        return product;
+    }
+
 
     // Getting users Count
     public int getProductsCount() {
@@ -203,7 +229,7 @@ public class Database extends SQLiteOpenHelper {
         return cursor.getCount();
     }
     //------------------------------------------------------------------------------------------------------
-    //insertUser
+    //Address
     public void insertAddress(String description, int picture){
         SQLiteDatabase db = this.getWritableDatabase();
         String sql = "INSERT INTO ADDRESS VALUES(NULL, ?, ?)";
@@ -216,6 +242,73 @@ public class Database extends SQLiteOpenHelper {
         statement.executeInsert();
     }
 
+
+
+    //rate
+    public void insertRate(Rate rate){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("ID_PRODUCT", rate.get_idProduct());
+        values.put("NAME",rate.get_name());
+        values.put("DATE_RATING", "" + rate.get_dateRating());
+        values.put("RATING", rate.get_rating());
+        values.put("CMT", rate.get_cmt());
+        // Inserting Row
+        db.insert("RATE", null, values);
+        //2nd argument is String containing nullColumnHack
+        db.close(); // Closing database connection
+    }
+
+    public ArrayList<Rate> getRateByIdPro(int id) {
+        ArrayList<Rate> rateArrayList= new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor dataFood = db.query("RATE", new String[] { "ID",
+                        "ID_PRODUCT", "NAME", "DATE_RATING", "RATING", "CMT" }, "ID_PRODUCT" + "=?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
+
+        while (dataFood.moveToNext()){
+            rateArrayList.add(new Rate(dataFood.getInt(0),
+                    dataFood.getInt(1), dataFood.getString(2),
+                    dataFood.getString(3), dataFood.getFloat(4), dataFood.getString(5)));
+        }
+        // return user
+        return rateArrayList;
+    }
+    float getRatingByFood(int id) {
+
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM RATE WHERE ID_PRODUCT = '" + id + "'", null);
+        // cursor.close();
+        float tong = 0;
+        // return count
+        if(cursor != null)
+        {
+            while (cursor.moveToNext()){
+                tong = tong + cursor.getFloat(4);
+            }
+            return tong/cursor.getCount();
+        }
+        else
+        {
+            return 0;
+        }
+
+    }
+    int getCountRating(int id) {
+
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM RATE WHERE ID_PRODUCT = '" + id + "'", null);
+        // cursor.close();
+
+        // return count
+        return cursor.getCount();
+    }
+
+    //
 
     @Override
     public void onCreate(SQLiteDatabase db) {
