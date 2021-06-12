@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -38,8 +40,13 @@ public class FoodDetailActivity extends AppCompatActivity {
     ArrayList<Rate> rateArrayList;
     ListView lvRate;
     Intent intent;
+    EditText txtAmount;
+    ImageButton up;
+    ImageButton down;
+    Button bookNow;
     int dem  = 0;
     int id;
+    double price;
     SharedPreferences sharedPreferencesCart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +60,17 @@ public class FoodDetailActivity extends AppCompatActivity {
         priceFood = (TextView)findViewById(R.id.priceFood);
         description = (TextView)findViewById(R.id.description);
         lvRate = (ListView)findViewById(R.id.lvRate);
+        txtAmount = (EditText)findViewById(R.id.amount);
+        up = (ImageButton)findViewById(R.id.up);
+        down = (ImageButton)findViewById(R.id.down);
+        bookNow = (Button)findViewById(R.id.Book);
+
+        sharedPreferencesCart = getSharedPreferences("dataCart", MODE_PRIVATE);
+
         productArrayList = new ArrayList<>();
         positionCate = getIntent().getIntExtra("positionCate", -1);
         positionPro = getIntent().getIntExtra("positionPro", -1);
-        Toast.makeText(this.getApplication(), "" + positionCate, Toast.LENGTH_SHORT).show();
-
-
+        //Toast.makeText(this.getApplication(), "" + positionCate, Toast.LENGTH_SHORT).show();
         db = new Database(this);
         sqLiteDatabase = db.getReadableDatabase();
         productArrayList = db.getProductByCategory(positionCate + 1);
@@ -69,7 +81,8 @@ public class FoodDetailActivity extends AppCompatActivity {
                 id = pro.getID();
                 imgFood.setImageResource(pro.get_picture());
                 nameFood.setText(pro.getName());
-                priceFood.setText("Giá: " + pro.get_price() + " VND");
+                price = pro.get_price();
+                priceFood.setText("Giá: " + price + " VND");
                 description.setText(pro.getDescription());
                 break;
             }
@@ -121,9 +134,68 @@ public class FoodDetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        sharedPreferencesCart = getSharedPreferences("dataCart", MODE_PRIVATE);
+
+        up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String amountNow = txtAmount.getText().toString();
+                int amount = 1 + Integer.parseInt(amountNow);
+                String a = "" + amount;
+                txtAmount.setText(a);
+            }
+        });
+
+        down.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String amountNow = txtAmount.getText().toString();
+                if(Integer.parseInt(amountNow) <= 1)
+                {
+
+                }
+                else
+                {
+                    int amount = -1 + Integer.parseInt(amountNow);
+                    String a = "" + amount;
+                    txtAmount.setText(a);
+                }
+
+            }
+        });
 
 
+
+        bookNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = sharedPreferencesCart.edit();
+                if(sharedPreferencesCart.getInt(""+id, -1) == id)
+                {
+                    String amountNow = txtAmount.getText().toString();
+                    int amountBook = Integer.parseInt(amountNow);
+                    int amount = sharedPreferencesCart.getInt("amount" + id, 0);
+                    editor.putInt("amount" + id, amount + amountBook);
+                    float total = sharedPreferencesCart.getFloat("total", 0);
+                    editor.putFloat("total", (float) (total + price*(amountBook)));
+                }
+                else
+                {
+                    String amountNow = txtAmount.getText().toString();
+                    int amountBook = Integer.parseInt(amountNow);
+                    editor.putInt(""+id, id );
+                    editor.putInt("amount" + id, amountBook);
+                    float total = sharedPreferencesCart.getFloat("total", 0);
+                    editor.putFloat("total", (float) (total + price*amountBook));
+                    //editor.put
+                }
+                editor.commit();
+                Intent intent = new Intent(FoodDetailActivity.this, CartActivity.class);
+                intent.putExtra("name", "foodDetail");
+                intent.putExtra("positionCate", positionCate);
+                intent.putExtra("positionPro", positionPro);
+                startActivity(intent);
+            }
+        });
 
         final CircleMenuView circleMenuView = findViewById(R.id.circleMenu);
         circleMenuView.setEventListener( new CircleMenuView.EventListener(){
@@ -151,22 +223,26 @@ public class FoodDetailActivity extends AppCompatActivity {
                         SharedPreferences.Editor editor = sharedPreferencesCart.edit();
                         if(sharedPreferencesCart.getInt(""+id, -1) == id)
                         {
+                            String amountNow = txtAmount.getText().toString();
+                            int amountBook = Integer.parseInt(amountNow);
                             int amount = sharedPreferencesCart.getInt("amount" + id, 0);
-
-                            editor.putInt("amount" + id, amount + 1);
+                            editor.putInt("amount" + id, amount + amountBook);
+                            double total = sharedPreferencesCart.getFloat("total", 0);
+                            editor.putFloat("total", (float) (total + price));
                         }
                         else
                         {
+                            String amountNow = txtAmount.getText().toString();
+                            int amountBook = Integer.parseInt(amountNow);
                             editor.putInt(""+id, id );
-                            editor.putInt("amount" + id, 1);
-                            int amountAll = sharedPreferencesCart.getInt("amountAllPro", 0);
-                            editor.putInt("amountAllPro", amountAll + 1);
+                            editor.putInt("amount" + id, amountBook);
+                            double total = sharedPreferencesCart.getFloat("total", 0);
+                            editor.putFloat("total", (float) (total + price));
                             //editor.put
                         }
                         editor.commit();
-                        Toast.makeText(getBaseContext(), "Đã thêm vao giỏ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(), "Đã thêm vào giỏ", Toast.LENGTH_SHORT).show();
                         break;
-
                 }
             }
         });

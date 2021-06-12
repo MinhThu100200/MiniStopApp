@@ -108,24 +108,6 @@ public class MainActivity extends AppCompatActivity {
         int count = 0;
         Cursor allProduct = db.GetData(query);
 
-        while (allProduct.moveToNext())
-        {
-           if(sharedPreferencesCart.getInt("" + allProduct.getInt(0), -1) == allProduct.getInt(0))
-           {
-               break;
-           }
-           else
-           {
-               count++;
-           }
-        }
-        if(count == allProduct.getCount())
-        {
-            SharedPreferences.Editor editor = sharedPreferencesCart.edit();
-            editor.putInt("amountAllPro", 0);
-            editor.commit();
-        }
-
         txtSignUp = (TextView) findViewById(R.id.txtSingUp);
         txtFogotPass = (TextView) findViewById(R.id.txtForgotPass);
 
@@ -214,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
              editor.putString("email", personEmail);
             //editor.put
              editor.commit();
-           db.insertUser(new User("", "", personEmail, personName, "", 0, null));
+            db.insertUser(new User("", "", personEmail, personName, "", 0, null));
             Intent intent = new  Intent(getBaseContext(), HomePageActivity.class);
             //intent.putExtra("urip", personPhoto);
             startActivity(intent);

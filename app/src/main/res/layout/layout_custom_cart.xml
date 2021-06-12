@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
-        android:text=""
+        android:focusable="false"
+        android:enabled="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,40 +25,36 @@
         app:layout_constraintStart_toEndOf="@+id/checkBox"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <NumberPicker
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
+    <EditText
+        android:id="@+id/amount"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="72dp"
+        android:inputType="number"
+        android:focusable="false"
+        android:background="@drawable/boder_edittext"
         app:layout_constraintStart_toEndOf="@+id/imageFoodDetail"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/nameFood"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/imageFoodDetail"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/priceFood"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/imageFoodDetail"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="36dp"
-        android:src="@drawable/ic_baseline_delete_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

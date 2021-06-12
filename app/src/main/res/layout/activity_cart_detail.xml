@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FoodDetailActivity">
+    tools:context=".CartDetailActivity">
+
 
     <include
         android:id="@+id/toolbar"
@@ -40,37 +41,6 @@
         android:id="@+id/description"
         android:textSize="15sp"
         android:paddingLeft="10dp" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_below="@id/description"
-        android:paddingRight="10dp"
-        android:gravity="center"
-        android:text="_______  Đánh giá và Nhận xét  _______"
-        android:textSize="20sp"
-        android:id="@+id/titleCmt"
-        android:paddingLeft="10dp"/>
-
-    <ListView
-        android:id="@+id/lvRate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/titleCmt"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp" />
-
-    <com.ramotion.circlemenu.CircleMenuView android:layout_height="wrap_content"
-        android:layout_width="300dp"
-        android:id="@+id/circleMenu"
-        app:icon_color="@color/white"
-        app:distance="60dp"
-        android:layout_marginTop="140dp"
-        android:paddingLeft="20dp"
-        android:layout_marginLeft="120dp"
-        app:button_icons="@array/icons"
-        app:button_colors="@array/colors">
-    </com.ramotion.circlemenu.CircleMenuView>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -84,12 +54,19 @@
         android:layout_marginBottom="0dp"
         android:background="@color/white" >
         <Button
-            android:id="@+id/Book"
+            android:id="@+id/edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="250dp"
+            android:layout_marginLeft="180dp"
             android:background="@drawable/boder_button"
-            android:text="Mua Ngay"/>
+            android:text="Sửa"/>
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="280dp"
+            android:background="@drawable/boder_button_delete"
+            android:text="Xóa"/>
 
         <EditText
             android:layout_width="50dp"
@@ -113,4 +90,5 @@
             android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
             android:layout_marginLeft="117dp"/>
     </com.google.android.material.bottomnavigation.BottomNavigationView>
+
 </RelativeLayout>

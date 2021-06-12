@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConfirmAddressActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -10,9 +13,32 @@
     <ListView
         android:id="@+id/lvFood"
         android:layout_width="match_parent"
-        android:layout_height="599dp"
+        android:layout_height="450dp"
         android:layout_below="@+id/toolbar"
         android:paddingLeft="10dp"></ListView>
+    <TextView
+        android:id="@+id/titleAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đại chỉ giao hàng"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:paddingLeft="5dp"
+        android:layout_below="@id/lvFood"
+        />
+    <EditText
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_marginTop="20dp"
+        android:textSize="15sp"
+        android:layout_marginLeft="10dp"
+        android:hint="Nhập địa chỉ của bạn"
+        android:background="@drawable/boder_edittext"
+        android:layout_below="@id/titleAddress"/>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigationView"
         android:layout_width="match_parent"
@@ -28,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="280dp"
-            android:text="Đặt Hàng"
+            android:text="Xác nhận"
             android:background="@drawable/boder_button"/>
         <TextView
             android:layout_width="wrap_content"
@@ -39,6 +65,5 @@
             android:layout_marginLeft="150dp"/>
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
-
 
 </RelativeLayout>

@@ -2,6 +2,7 @@ package hcmute.edu.vn.mssv18128062;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -217,7 +218,6 @@ public class Database extends SQLiteOpenHelper {
         return product;
     }
 
-
     // Getting users Count
     public int getProductsCount() {
         String countQuery = "SELECT  * FROM PRODUCT";
@@ -228,6 +228,8 @@ public class Database extends SQLiteOpenHelper {
         // return count
         return cursor.getCount();
     }
+
+
     //------------------------------------------------------------------------------------------------------
     //Address
     public void insertAddress(String description, int picture){
