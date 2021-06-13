@@ -54,7 +54,27 @@ public class Database extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
     // code to get the single user
+    Cursor getUserByEmail(String email) {
 
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM USERS WHERE EMAIL = '" + email + "'", null);
+        // cursor.close();
+
+        // return count
+        return cursor;
+    }
+
+    Cursor getUserById(int id) {
+
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM USERS WHERE ID = '" + id + "'", null);
+        // cursor.close();
+
+        // return count
+        return cursor;
+    }
 
     // code to update the single contact
     public int updateUser(User user) {
@@ -74,16 +94,19 @@ public class Database extends SQLiteOpenHelper {
         return db.update("USERS", values, "ID" + " = ?",
                 new String[] { String.valueOf(user.getID()) });
     }
-    public int updateUserPoint(User user) {
+    public boolean updateUserPoint(int id, int point) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put("POINT", user.get_point());
+        values.put("POINT", point);
 
         // updating row
-        return db.update("USERS", values, "ID" + " = ?",
-                new String[] { String.valueOf(user.getID()) });
+        db.update("USERS", values, "ID" + " = ?",
+                new String[] { String.valueOf( id ) });
+        return true;
     }
+
+
 
     // Deleting single user
     public void deleteUser(User user) {
@@ -211,7 +234,7 @@ public class Database extends SQLiteOpenHelper {
 
 
             Product product = new Product(dataFood.getInt(0),
-                    dataFood.getString(1), dataFood.getDouble(2),
+                    dataFood.getString(1), dataFood.getFloat(2),
                     dataFood.getString(3), dataFood.getInt(4), dataFood.getInt(5));
 
         // return user
@@ -253,7 +276,7 @@ public class Database extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("ID_PRODUCT", rate.get_idProduct());
         values.put("NAME",rate.get_name());
-        values.put("DATE_RATING", "" + rate.get_dateRating());
+        values.put("DATE_RATING", rate.get_dateRating());
         values.put("RATING", rate.get_rating());
         values.put("CMT", rate.get_cmt());
         // Inserting Row
@@ -310,7 +333,76 @@ public class Database extends SQLiteOpenHelper {
         return cursor.getCount();
     }
 
-    //
+    //order
+    public void insertOrder(Order order){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("ID_PRODUCT", order.get_idProduct());
+        values.put("PRICE", order.get_price());
+        values.put("AMOUNT_PRODUCT", order.get_amount());
+        values.put("ID_BOOKED", order.get_idBooked());
+
+        // Inserting Row
+        db.insert("ORDERS", null, values);
+        //2nd argument is String containing nullColumnHack
+        db.close(); // Closing database connection
+    }
+    Cursor getOrderByIdBooked(int id) {
+
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM ORDERS WHERE ID = '" + id + "'", null);
+        // cursor.close();
+
+        // return count
+        return cursor;
+    }
+
+    //book
+    public void insertBooked(Booked booked){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("DATE_ORDER", booked.get_dateOrder());
+        values.put("STATUS", booked.get_status());
+        values.put("ADDRESS", booked.get_address());
+
+        // Inserting Row
+        db.insert("BOOKED", null, values);
+        //2nd argument is String containing nullColumnHack
+        db.close(); // Closing database connection
+    }
+    public int updateStatusBooked(int status, int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("STATUS", status); // Username
+
+        // updating row
+        return db.update("BOOKED", values, "ID" + " = ?",
+                new String[] { String.valueOf(id) });
+    }
+    Cursor getBookedById(int id) {
+
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM BOOKED WHERE ID = '" + id + "'", null);
+        // cursor.close();
+
+        // return count
+        return cursor;
+    }
+    Cursor getBookedByDate(String date) {
+
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM BOOKED WHERE DATE_ORDER = '" + date + "'", null);
+        // cursor.close();
+
+        // return count
+        return cursor;
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {

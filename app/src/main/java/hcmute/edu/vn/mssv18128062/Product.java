@@ -5,7 +5,7 @@ import android.widget.ImageButton;
 public class Product {
     int _id;
     String _name;
-    double _price;
+    float _price;
     String _description;
     int _idcategory;
     int _picture;
@@ -14,7 +14,7 @@ public class Product {
 
 
     public Product(){   }
-    public Product(int id, String _name, double _price, String _description, int _idcategory, int _picture){
+    public Product(int id, String _name, float _price, String _description, int _idcategory, int _picture){
         this._id = id;
         this._name = _name;
         this._picture = _picture;
@@ -23,7 +23,7 @@ public class Product {
         this._price = _price;
     }
 
-    public Product(String _name, double _price, String _description, int _idcategory, int _picture){
+    public Product(String _name, float _price, String _description, int _idcategory, int _picture){
         this._name = _name;
         this._picture = _picture;
         this._description = _description;
@@ -46,11 +46,11 @@ public class Product {
         this._name = name;
     }
 
-    public double get_price() {
+    public float get_price() {
         return _price;
     }
 
-    public void set_price(double _price) {
+    public void set_price(float _price) {
         this._price = _price;
     }
 

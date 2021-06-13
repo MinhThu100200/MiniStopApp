@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //ch = (ImageView)findViewById(R.id.ch);
+
         db = new Database(this);
 
         db.QueryData("CREATE TABLE IF NOT EXISTS USERS(ID INTEGER PRIMARY KEY AUTOINCREMENT, USERNAME TEXT, " +
@@ -66,9 +66,11 @@ public class MainActivity extends AppCompatActivity {
                 "ID_CATEGORY INTEGER, IMAGE_ID INTEGER)");
         db.QueryData("CREATE TABLE IF NOT EXISTS RATE( ID INTEGER PRIMARY KEY AUTOINCREMENT, ID_PRODUCT INTEGER, NAME TEXT, DATE_RATING TEXT, " +
                 "RATING FLOAT, CMT TEXT)");
-        db.QueryData("CREATE TABLE IF NOT EXISTS BOOKED( ID INTEGER PRIMARY KEY AUTOINCREMENT, DATE_ORDER TEXT)");
+        db.QueryData("CREATE TABLE IF NOT EXISTS BOOKED( ID INTEGER PRIMARY KEY AUTOINCREMENT, DATE_ORDER TEXT, STATUS INTEGER, ADDRESS TEXT)");
         db.QueryData("CREATE TABLE IF NOT EXISTS ORDERS( ID INTEGER PRIMARY KEY AUTOINCREMENT, ID_PRODUCT INTEGER, PRICE FLOAT, AMOUNT_PRODUCT INTEGER, " +
-             "ID_BOOKED INTEGER, DATE_ORDER TEXT)");
+             "ID_BOOKED INTEGER)");
+
+
 
 
 
@@ -185,10 +187,6 @@ public class MainActivity extends AppCompatActivity {
             String personEmail = account.getEmail();
             String personId = account.getId();
             Uri personPhoto = account.getPhotoUrl();
-            //Bitmap bitmap = null;
-
-            //BitmapDrawable bitmapDrawable = (BitmapDrawable) .getDrawable();
-           // Bitmap bitmap = bitmapDrawable.getBitmap();
 
              sharedPreferencesUser = getSharedPreferences("dataLogin", MODE_PRIVATE);
              SharedPreferences.Editor editor = sharedPreferencesUser.edit();
@@ -196,10 +194,24 @@ public class MainActivity extends AppCompatActivity {
              editor.putString("email", personEmail);
             //editor.put
              editor.commit();
-            db.insertUser(new User("", "", personEmail, personName, "", 0, null));
-            Intent intent = new  Intent(getBaseContext(), HomePageActivity.class);
+             int flag = 0;
+            Cursor user = db.GetData("SELECT * FROM USERS");
+            while(user.moveToNext()){
+                if(user.getString(3).equals(personEmail))
+                {
+                   flag = 1;
+                   break;
+
+                }
+            }
+            if(flag == 0)
+            {
+                db.insertUser(new User("", "", personEmail, personName, "", 0, null));
+            }
+
+             Intent intent = new  Intent(getBaseContext(), HomePageActivity.class);
             //intent.putExtra("urip", personPhoto);
-            startActivity(intent);
+             startActivity(intent);
             //ch.setImageURI(personPhoto);
         }
 

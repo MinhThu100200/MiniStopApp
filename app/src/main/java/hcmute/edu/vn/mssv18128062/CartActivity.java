@@ -33,10 +33,14 @@ public class CartActivity extends AppCompatActivity {
     String name;
     int positionCate;
     int positionPro;
+    ImageButton info;
+    ImageButton cart;
+    ImageButton notification;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+
 
         intentFoward = getIntent();
         name = getIntent().getStringExtra("name");
@@ -53,13 +57,18 @@ public class CartActivity extends AppCompatActivity {
         sqLiteDatabase = db.getReadableDatabase();
 
         sharedPreferencesCart = getSharedPreferences("dataCart", MODE_PRIVATE);
+        if(sharedPreferencesCart.getFloat("total", 0) != 0)
+        {
+            buttonBook.setEnabled(true);
+        }
+
         String query = "SELECT * FROM PRODUCT";
         cursor = db.GetData(query);
         while (cursor.moveToNext())
         {
             if(sharedPreferencesCart.getInt(""+cursor.getInt(0), -1) == cursor.getInt(0)){
                 int amount = sharedPreferencesCart.getInt("amount" + cursor.getInt(0), -1);
-                productArrayList.add(new Product(cursor.getInt(0), cursor.getString(1), cursor.getDouble(2),
+                productArrayList.add(new Product(cursor.getInt(0), cursor.getString(1), cursor.getFloat(2),
                         cursor.getString(3), amount, cursor.getInt(5)));
 
 
@@ -95,6 +104,42 @@ public class CartActivity extends AppCompatActivity {
                     intentBack.putExtra("positionPro", positionPro);
                     startActivity(intentBack);
                 }
+                else if(name.equals("confirm"))
+                {
+                    Intent intentBack = new Intent(getApplicationContext(), ConfirmAddressActivity.class);
+                    startActivity(intentBack);
+                }
+                else if(name.equals("home"))
+                {
+                    Intent intentBack = new Intent(getApplicationContext(), HomePageActivity.class);
+                    intentBack.putExtra("name", "home");
+                    startActivity(intentBack);
+                }
+                else if(name.equals("product")){
+                    Intent intentBack = new Intent(getApplicationContext(), HomePageActivity.class);
+                    intentBack.putExtra("name", "product");
+                    startActivity(intentBack);
+                }
+                else if(name.equals("point")){
+                    Intent intentBack = new Intent(getApplicationContext(), HomePageActivity.class);
+                    intentBack.putExtra("name", "point");
+                    startActivity(intentBack);
+                }
+                else if(name.equals("promotion")){
+                    Intent intentBack = new Intent(getApplicationContext(), HomePageActivity.class);
+                    intentBack.putExtra("name", "promotion");
+                    startActivity(intentBack);
+                }
+                else if(name.equals("other")){
+                    Intent intentBack = new Intent(getApplicationContext(), HomePageActivity.class);
+                    intentBack.putExtra("name", "other");
+                    startActivity(intentBack);
+                }
+                else if(name.equals("food")){
+                    Intent intentBack = new Intent(getApplicationContext(), HomePageActivity.class);
+                    intentBack.putExtra("positionCate", positionCate);
+                    startActivity(intentBack);
+                }
 
                 //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.contant_main, new Home()).commit();
             }
@@ -102,10 +147,39 @@ public class CartActivity extends AppCompatActivity {
         buttonBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ConfirmAddressActivity.class);
+                startActivity(intent);
+            }
+        });
+        cart = (ImageButton)findViewById(R.id.cart);
+        cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new  Intent(getBaseContext(), CartActivity.class);
+                startActivity(intent);
+            }
+        });
+        //
 
+        notification = (ImageButton)findViewById(R.id.notification);
+        notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentRate = new  Intent(getBaseContext(), NotificationActivity.class);
+                startActivity(intentRate);
+            }
+        });
+
+        //
+
+        info = (ImageButton)findViewById(R.id.profile);
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new  Intent(getBaseContext(), MyInfoActivity.class);
+                startActivity(intent);
             }
         });
     }
-
 
 }

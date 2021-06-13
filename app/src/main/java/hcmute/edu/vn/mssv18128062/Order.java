@@ -8,7 +8,7 @@ public class Order {
     float _price;
     int _amount;
     int _idBooked;
-    Date _dateOrder;
+
 
     public int get_id() {
         return _id;
@@ -50,31 +50,22 @@ public class Order {
         this._idBooked = _idBooked;
     }
 
-    public Date get_dateOrder() {
-        return _dateOrder;
-    }
-
-    public void set_dateOrder(Date _dateOrder) {
-        this._dateOrder = _dateOrder;
-    }
 
     public Order() {
     }
 
-    public Order(int _idProduct, float _price, int _amount, int _idBooked, Date _dateOrder) {
+    public Order(int _idProduct, float _price, int _amount, int _idBooked) {
         this._idProduct = _idProduct;
         this._price = _price;
         this._amount = _amount;
         this._idBooked = _idBooked;
-        this._dateOrder = _dateOrder;
     }
 
-    public Order(int _id, int _idProduct, float _price, int _amount, int _idBooked, Date _dateOrder) {
+    public Order(int _id, int _idProduct, float _price, int _amount, int _idBooked) {
         this._id = _id;
         this._idProduct = _idProduct;
         this._price = _price;
         this._amount = _amount;
         this._idBooked = _idBooked;
-        this._dateOrder = _dateOrder;
     }
 }

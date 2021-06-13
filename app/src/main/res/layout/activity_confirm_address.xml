@@ -11,11 +11,22 @@
         layout="@layout/toolbar_food"></include>
 
     <ListView
+        android:layout_marginTop="20dp"
         android:id="@+id/lvFood"
         android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:layout_below="@+id/toolbar"
-        android:paddingLeft="10dp"></ListView>
+        android:layout_height="470dp"
+        android:layout_below="@+id/address"
+        android:paddingLeft="10dp">
+
+    </ListView>
+    <ProgressBar
+        android:id="@+id/simpleProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_below="@id/toolbar"
+
+        android:layout_centerHorizontal="true"/>
     <TextView
         android:id="@+id/titleAddress"
         android:layout_width="wrap_content"
@@ -24,7 +35,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:paddingLeft="5dp"
-        android:layout_below="@id/lvFood"
+        android:layout_below="@id/toolbar"
         />
     <EditText
         android:id="@+id/address"
@@ -50,7 +61,7 @@
         android:layout_marginBottom="0dp"
         android:background="@color/white" >
         <Button
-            android:id="@+id/Book"
+            android:id="@+id/confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="280dp"
@@ -64,6 +75,9 @@
             android:text="200000 VND"
             android:layout_marginLeft="150dp"/>
 
+
     </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+
 
 </RelativeLayout>

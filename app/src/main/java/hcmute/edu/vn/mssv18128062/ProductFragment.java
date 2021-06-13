@@ -92,7 +92,7 @@ public class ProductFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 intent = new Intent(getContext(),FoodActivity.class);
-                intent.putExtra("position", position);
+                intent.putExtra("positionCate", position);
                 startActivity(intent);
             }
         });

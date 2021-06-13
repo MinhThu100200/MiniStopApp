@@ -61,7 +61,7 @@ public class FoodActivity extends AppCompatActivity {
         //txtTitle.setText();
         Intent intent = getIntent();
 
-        positionCate = getIntent().getIntExtra("position", -1);
+        positionCate = getIntent().getIntExtra("positionCate", -1);
 
         Toast.makeText(this.getApplication(), "" + positionCate, Toast.LENGTH_SHORT).show();
 
@@ -89,7 +89,7 @@ public class FoodActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intentBack = new Intent(getApplicationContext(),HomePageActivity.class);
-                intentBack.putExtra("flag", positionCate);
+                intentBack.putExtra("name", "product");
                 startActivity(intentBack);
                 //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.contant_main, new Home()).commit();
             }
@@ -100,6 +100,8 @@ public class FoodActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new  Intent(getBaseContext(), CartActivity.class);
+                intent.putExtra("name", "food");
+                intent.putExtra("positionCate", positionCate);
                 startActivity(intent);
             }
         });

@@ -44,18 +44,53 @@ public class HomePageActivity extends AppCompatActivity {
         fragmentTransaction.commit();
         //
         Intent intent = getIntent();
-
-        if(getIntent().getIntExtra("flag", -1) != -1)
-        {
-            bottomNavigationView.setSelectedItemId(R.id.navigation_products);
-            //bottomNavigationView.setOnNavigationItemSelectedListener(R.id.navigation_products);
+        String name = getIntent().getStringExtra("name");
+        if(name != null){
+            if(name.equals("product"))
+            {
+                bottomNavigationView.setSelectedItemId(R.id.navigation_products);
+                //bottomNavigationView.setOnNavigationItemSelectedListener(R.id.navigation_products);
+            }
+            else if(name.equals("home")){
+                bottomNavigationView.setSelectedItemId(R.id.navigation_store);
+            }
+            else if(name.equals("promotion")){
+                bottomNavigationView.setSelectedItemId(R.id.navigation_discount);
+            }
+            else if(name.equals("point")){
+                bottomNavigationView.setSelectedItemId(R.id.navigation_points);
+            }
+            else{
+                bottomNavigationView.setSelectedItemId(R.id.navigation_others);
+            }
         }
+
         //
         cart = (ImageButton)findViewById(R.id.cart);
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new  Intent(getBaseContext(), CartActivity.class);
+                if(textView.getText().equals("Home"))
+                {
+                    intent.putExtra("name", "home");
+                }
+                else if(textView.getText().equals("Products"))
+                {
+                    intent.putExtra("name", "product");
+                }
+                else if(textView.getText().equals("Promotion"))
+                {
+                    intent.putExtra("name", "promotion");
+                }
+                else if(textView.getText().equals("Points"))
+                {
+                    intent.putExtra("name", "point");
+                }
+                else
+                {
+                    intent.putExtra("name", "other");
+                }
                 startActivity(intent);
             }
         });

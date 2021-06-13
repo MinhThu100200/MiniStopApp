@@ -46,7 +46,7 @@ public class FoodDetailActivity extends AppCompatActivity {
     Button bookNow;
     int dem  = 0;
     int id;
-    double price;
+    float price;
     SharedPreferences sharedPreferencesCart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +99,7 @@ public class FoodDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intentBack = new Intent(getApplicationContext(),FoodActivity.class);
-                intentBack.putExtra("position", positionCate);
+                intentBack.putExtra("positionCate", positionCate);
                 startActivity(intentBack);
                 //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.contant_main, new Home()).commit();
             }
@@ -110,6 +110,7 @@ public class FoodDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new  Intent(getBaseContext(), CartActivity.class);
+                intent.putExtra("name", "foodDetail");
                 startActivity(intent);
             }
         });
@@ -176,7 +177,7 @@ public class FoodDetailActivity extends AppCompatActivity {
                     int amount = sharedPreferencesCart.getInt("amount" + id, 0);
                     editor.putInt("amount" + id, amount + amountBook);
                     float total = sharedPreferencesCart.getFloat("total", 0);
-                    editor.putFloat("total", (float) (total + price*(amountBook)));
+                    editor.putFloat("total", (total + price*(amountBook)));
                 }
                 else
                 {
@@ -185,7 +186,7 @@ public class FoodDetailActivity extends AppCompatActivity {
                     editor.putInt(""+id, id );
                     editor.putInt("amount" + id, amountBook);
                     float total = sharedPreferencesCart.getFloat("total", 0);
-                    editor.putFloat("total", (float) (total + price*amountBook));
+                    editor.putFloat("total", (total + price*amountBook));
                     //editor.put
                 }
                 editor.commit();
@@ -227,8 +228,8 @@ public class FoodDetailActivity extends AppCompatActivity {
                             int amountBook = Integer.parseInt(amountNow);
                             int amount = sharedPreferencesCart.getInt("amount" + id, 0);
                             editor.putInt("amount" + id, amount + amountBook);
-                            double total = sharedPreferencesCart.getFloat("total", 0);
-                            editor.putFloat("total", (float) (total + price));
+                            float total = sharedPreferencesCart.getFloat("total", 0);
+                            editor.putFloat("total", (total + price*amountBook));
                         }
                         else
                         {
@@ -236,8 +237,8 @@ public class FoodDetailActivity extends AppCompatActivity {
                             int amountBook = Integer.parseInt(amountNow);
                             editor.putInt(""+id, id );
                             editor.putInt("amount" + id, amountBook);
-                            double total = sharedPreferencesCart.getFloat("total", 0);
-                            editor.putFloat("total", (float) (total + price));
+                            float total = sharedPreferencesCart.getFloat("total", 0);
+                            editor.putFloat("total", (total + price*amountBook));
                             //editor.put
                         }
                         editor.commit();
