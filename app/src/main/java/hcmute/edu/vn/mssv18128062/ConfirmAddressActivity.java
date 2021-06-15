@@ -147,7 +147,9 @@ public class ConfirmAddressActivity extends AppCompatActivity {
                     LocalDateTime lt = LocalDateTime.now();
                     DateTimeFormatter formatToday = DateTimeFormatter.ofPattern("MM/dd/yy:hh:mm:ss");
                     String datenow = lt.format(formatToday);
-                    db.insertBooked(new Booked(datenow, 0, address));
+                    float total = sharedPreferencesCart.getFloat("total", 0);
+                    int point = (int)(total/5000);
+                    db.insertBooked(new Booked(datenow, 0, address, total));
                     Cursor cursorBooked = db.getBookedByDate(datenow);
                     //int a = cursorBooked.getCount();
                     String query = "SELECT * FROM PRODUCT";
@@ -170,8 +172,7 @@ public class ConfirmAddressActivity extends AppCompatActivity {
                             editor.commit();
                         }
                     }
-                    float total = sharedPreferencesCart.getFloat("total", 0);
-                    int point = (int)(total/5000);
+
                     if(sharedPreferencesUser.getInt("id", -1) == -1)
                     {
                         String email = sharedPreferencesUser.getString("email", "");
@@ -180,7 +181,8 @@ public class ConfirmAddressActivity extends AppCompatActivity {
                             if(user.getString(3).equals(email))
                             {
                                 int id = user.getInt(0);
-                                db.QueryData("UPDATE USERS SET POINT='"+point+"' WHERE ID=" + id +"");
+                                int totalPoint = user.getInt(6) + point;
+                                db.QueryData("UPDATE USERS SET POINT='"+totalPoint+"' WHERE ID=" + id +"");
                             }
                         }
                     }

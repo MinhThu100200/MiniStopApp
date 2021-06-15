@@ -17,6 +17,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.Date;
@@ -33,6 +34,8 @@ public class SignUpActivity extends AppCompatActivity {
     TextView txtLogin;
     Button btnChoose, btnTakePhoto;
     ImageView imageView;
+    EditText txtUsername;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,13 +81,8 @@ public class SignUpActivity extends AppCompatActivity {
 
             }
         });
-    }
 
-    //public static Bitmap rotateImage(Bitmap source, float angle) {
-       // Matrix matrix = new Matrix();
-       // matrix.postRotate(angle);
-       // return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
-    //}
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {

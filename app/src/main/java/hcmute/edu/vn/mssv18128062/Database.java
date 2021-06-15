@@ -86,13 +86,12 @@ public class Database extends SQLiteOpenHelper {
         values.put("EMAIL", user.getEmail()); //email
         values.put("NAME", user.get_name());
         values.put("PHONE", user.get_phone_number());
-        values.put("POINT", user.get_point());
         values.put("PICTURE", user.get_picture());
 
 
         // updating row
         return db.update("USERS", values, "ID" + " = ?",
-                new String[] { String.valueOf(user.getID()) });
+                new String[] { String.valueOf( user.getID()) });
     }
     public boolean updateUserPoint(int id, int point) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -241,6 +240,16 @@ public class Database extends SQLiteOpenHelper {
         return product;
     }
 
+    Cursor getProductById(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor dataFood = db.query("PRODUCT", new String[] { "ID",
+                        "NAME", "PRICE", "DESCRIPTION", "ID_CATEGORY", "IMAGE_ID" }, "ID" + "=?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
+
+        return dataFood;
+    }
+
     // Getting users Count
     public int getProductsCount() {
         String countQuery = "SELECT  * FROM PRODUCT";
@@ -352,7 +361,7 @@ public class Database extends SQLiteOpenHelper {
 
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM ORDERS WHERE ID = '" + id + "'", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM ORDERS WHERE ID_BOOKED = '" + id + "'", null);
         // cursor.close();
 
         // return count
@@ -367,7 +376,7 @@ public class Database extends SQLiteOpenHelper {
         values.put("DATE_ORDER", booked.get_dateOrder());
         values.put("STATUS", booked.get_status());
         values.put("ADDRESS", booked.get_address());
-
+        values.put("TOTAL", booked.get_total());
         // Inserting Row
         db.insert("BOOKED", null, values);
         //2nd argument is String containing nullColumnHack
@@ -402,6 +411,19 @@ public class Database extends SQLiteOpenHelper {
 
         // return count
         return cursor;
+    }
+
+    //notification
+    public void insertNotification(String name, int imgId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sql = "INSERT INTO NOTIFICATION VALUES(NULL, ?, ?)";
+        SQLiteStatement statement = db.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindString(1, name);
+        statement.bindDouble(2, imgId);
+
+        statement.executeInsert();
     }
 
     @Override

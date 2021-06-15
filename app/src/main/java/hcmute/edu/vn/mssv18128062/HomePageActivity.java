@@ -60,7 +60,7 @@ public class HomePageActivity extends AppCompatActivity {
             else if(name.equals("point")){
                 bottomNavigationView.setSelectedItemId(R.id.navigation_points);
             }
-            else{
+            else if(name.equals("other") || name.equals("order")){
                 bottomNavigationView.setSelectedItemId(R.id.navigation_others);
             }
         }

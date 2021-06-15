@@ -40,11 +40,7 @@ public class FoodActivity extends AppCompatActivity {
     Intent intentBack;
     Intent intentFood;
     SearchView searchViewFood;
-    //TextView txtName;
-    //Intent intent;
-    //EditText filterText;
     int positionCate;
-    //TextView txtTitle;
     ImageButton imageButtonBack;
     private SQLiteDatabase sqLiteDatabase;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -53,18 +49,9 @@ public class FoodActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food);
-
-
-        //txtTitle = (TextView)findViewById(R.id.titleFood);
-
-
-        //txtTitle.setText();
         Intent intent = getIntent();
 
         positionCate = getIntent().getIntExtra("positionCate", -1);
-
-        Toast.makeText(this.getApplication(), "" + positionCate, Toast.LENGTH_SHORT).show();
-
         imageButtonBack = (ImageButton)findViewById(R.id.btnback);
         lvFood = (ListView)findViewById(R.id.lvFood);
         productArrayList = new ArrayList<>();

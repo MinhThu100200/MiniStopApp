@@ -85,7 +85,6 @@ public class CartAdapter extends ArrayAdapter {
         String totalAmount = "" + addressStore.getIdCategory();
         holder.amount.setText(totalAmount);
         holder.checkBox.setChecked(true);
-        holder.amount.setEnabled(true);
 
         return convertView;
     }

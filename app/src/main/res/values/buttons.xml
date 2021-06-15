@@ -17,4 +17,10 @@
         <item>@color/purple_200</item>
 
     </array>
+
+    <array name="cart">
+        <item>@drawable/ic_baseline_home_24</item>
+        <item>@drawable/ic_baseline_assignment_24</item>
+        <item>@drawable/ic_baseline_fastfood_24</item>
+    </array>
 </resources>

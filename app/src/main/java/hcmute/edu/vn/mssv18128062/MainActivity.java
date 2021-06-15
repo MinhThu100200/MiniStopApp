@@ -66,11 +66,11 @@ public class MainActivity extends AppCompatActivity {
                 "ID_CATEGORY INTEGER, IMAGE_ID INTEGER)");
         db.QueryData("CREATE TABLE IF NOT EXISTS RATE( ID INTEGER PRIMARY KEY AUTOINCREMENT, ID_PRODUCT INTEGER, NAME TEXT, DATE_RATING TEXT, " +
                 "RATING FLOAT, CMT TEXT)");
-        db.QueryData("CREATE TABLE IF NOT EXISTS BOOKED( ID INTEGER PRIMARY KEY AUTOINCREMENT, DATE_ORDER TEXT, STATUS INTEGER, ADDRESS TEXT)");
+        db.QueryData("CREATE TABLE IF NOT EXISTS BOOKED( ID INTEGER PRIMARY KEY AUTOINCREMENT, DATE_ORDER TEXT, STATUS INTEGER, ADDRESS TEXT, TOTAL FLOAT)");
         db.QueryData("CREATE TABLE IF NOT EXISTS ORDERS( ID INTEGER PRIMARY KEY AUTOINCREMENT, ID_PRODUCT INTEGER, PRICE FLOAT, AMOUNT_PRODUCT INTEGER, " +
              "ID_BOOKED INTEGER)");
 
-
+        db.QueryData("CREATE TABLE IF NOT EXISTS NOTIFICATION( ID, INFOMATION, IMAGE_ID)");
 
 
 
@@ -81,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
         db.insertAddress("12 Nguyễn Đình Chiểu phường 3 quận 6 tp.Trà Vinh", R.drawable.ch5);
          //1
         db.insertCategory("Mỳ cay", R.drawable.spicy);
-        //db.insertCategory("Mỳ cay");
         db.insertProduct("Mỳ cay hải sản", 40000, "Hương vị đê mê cho tín đồ mỳ cay, với độ cay xé lưỡi sẽ kích thích vị giác của bạn", 1, R.drawable.spicy);
          //2
         db.insertCategory("Đồ uống", R.drawable.drink);
@@ -187,7 +186,10 @@ public class MainActivity extends AppCompatActivity {
             String personEmail = account.getEmail();
             String personId = account.getId();
             Uri personPhoto = account.getPhotoUrl();
-
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.camera);
+            ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArray);
+            byte[] image = byteArray.toByteArray();
              sharedPreferencesUser = getSharedPreferences("dataLogin", MODE_PRIVATE);
              SharedPreferences.Editor editor = sharedPreferencesUser.edit();
              editor.putString("name", personName);
@@ -206,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
             }
             if(flag == 0)
             {
-                db.insertUser(new User("", "", personEmail, personName, "", 0, null));
+                db.insertUser(new User("", "", personEmail, personName, "", 0, image));
             }
 
              Intent intent = new  Intent(getBaseContext(), HomePageActivity.class);

@@ -21,7 +21,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/mint_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -78,8 +78,14 @@
             android:theme="@style/themeRate" />
         <activity
             android:name=".CartDetailActivity"
-            android:theme="@style/noTitle"></activity>
-        <activity android:name=".ConfirmAddressActivity"
+            android:theme="@style/noTitle" />
+        <activity
+            android:name=".ConfirmAddressActivity"
+            android:theme="@style/noTitle" />
+        <activity
+            android:name=".OrderActivity"
+            android:theme="@style/noTitle" />
+        <activity android:name=".OrderDetailActivity"
             android:theme="@style/noTitle"></activity>
     </application>
 

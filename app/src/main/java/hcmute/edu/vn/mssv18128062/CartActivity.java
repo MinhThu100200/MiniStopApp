@@ -13,7 +13,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.ramotion.circlemenu.CircleMenuView;
 
 import java.util.ArrayList;
 
@@ -36,6 +39,7 @@ public class CartActivity extends AppCompatActivity {
     ImageButton info;
     ImageButton cart;
     ImageButton notification;
+    //Button check;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +52,8 @@ public class CartActivity extends AppCompatActivity {
         positionPro = getIntent().getIntExtra("positionPro", -1);
 
         lvFood = (ListView)findViewById(R.id.lvFood);
+        //lvFood.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
         buttonBook = (Button)findViewById(R.id.Book);
         //
         txtTotal = (TextView)findViewById(R.id.total);
@@ -67,11 +73,10 @@ public class CartActivity extends AppCompatActivity {
         while (cursor.moveToNext())
         {
             if(sharedPreferencesCart.getInt(""+cursor.getInt(0), -1) == cursor.getInt(0)){
+
                 int amount = sharedPreferencesCart.getInt("amount" + cursor.getInt(0), -1);
                 productArrayList.add(new Product(cursor.getInt(0), cursor.getString(1), cursor.getFloat(2),
                         cursor.getString(3), amount, cursor.getInt(5)));
-
-
             }
         }
 
@@ -80,8 +85,8 @@ public class CartActivity extends AppCompatActivity {
 
         lvFood.setAdapter(cartAdapter);
 
-        String total = "" + sharedPreferencesCart.getFloat("total", 0);
-        txtTotal.setText(total);
+        float total = sharedPreferencesCart.getFloat("total", 0);
+        txtTotal.setText("Tổng: "+ total + "VND");
 
         lvFood.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -140,6 +145,15 @@ public class CartActivity extends AppCompatActivity {
                     intentBack.putExtra("positionCate", positionCate);
                     startActivity(intentBack);
                 }
+                else if(name.equals("order")){
+                    Intent intentBack = new Intent(getApplicationContext(), OrderActivity.class);
+                    intentBack.putExtra("name", "cart");
+                    startActivity(intentBack);
+                }
+                else {
+                    Intent intentBack = new Intent(getApplicationContext(), CartActivity.class);
+                    startActivity(intentBack);
+                }
 
                 //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.contant_main, new Home()).commit();
             }
@@ -178,6 +192,37 @@ public class CartActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new  Intent(getBaseContext(), MyInfoActivity.class);
                 startActivity(intent);
+            }
+        });
+
+
+        final CircleMenuView circleMenuView = findViewById(R.id.circleMenu);
+        circleMenuView.setEventListener( new CircleMenuView.EventListener(){
+            @Override
+            public void onMenuOpenAnimationStart(@NonNull CircleMenuView view) {
+                //do some
+            }
+
+            @Override
+            public void onButtonClickAnimationStart(@NonNull CircleMenuView view, int buttonIndex) {
+                super.onButtonClickAnimationStart(view, buttonIndex);
+                switch (buttonIndex){
+                    case 0:
+                        Intent intentHome = new Intent(getApplicationContext(), HomePageActivity.class);
+                        intentHome.putExtra("name", "home");
+                        startActivity(intentHome);
+                        break;
+                    case 1:
+                        Intent intentOrder = new Intent(getApplicationContext(), OrderActivity.class);
+                        intentOrder.putExtra("name", "cart");
+                        startActivity(intentOrder);
+                        break;
+                    case 2:
+                        Intent intentProduct = new Intent(getApplicationContext(), HomePageActivity.class);
+                        intentProduct.putExtra("name", "product");
+                        startActivity(intentProduct);
+                        break;
+                }
             }
         });
     }

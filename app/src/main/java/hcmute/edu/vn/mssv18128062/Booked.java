@@ -7,21 +7,25 @@ public class Booked {
     String _dateOrder;
     int _status;
     String _address;
+    float _total;
+
 
     public Booked() {
     }
 
-    public Booked(String _dateOrder, int _status, String _address) {
+    public Booked(String _dateOrder, int _status, String _address, float _total) {
         this._dateOrder = _dateOrder;
         this._status = _status;
         this._address = _address;
+        this._total = _total;
     }
 
-    public Booked(int _id, String _dateOrder, int _status, String _address) {
+    public Booked(int _id, String _dateOrder, int _status, String _address, float _total) {
         this._id = _id;
         this._dateOrder = _dateOrder;
         this._status = _status;
         this._address = _address;
+        this._total = _total;
     }
 
     public int get_id() {
@@ -55,4 +59,13 @@ public class Booked {
     public void set_address(String _address) {
         this._address = _address;
     }
+
+    public float get_total() {
+        return _total;
+    }
+
+    public void set_total(float _total) {
+        this._total = _total;
+    }
+
 }

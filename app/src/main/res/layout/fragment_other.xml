@@ -5,10 +5,54 @@
     android:layout_height="match_parent"
     tools:context=".OtherFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:padding="10dp">
+
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="60dp"
+           android:id="@+id/order"
+           android:text="Đơn Hàng"
+           android:padding="10dp"
+           android:textSize="25sp"
+           android:paddingLeft="10dp"
+           android:background="@drawable/border_listview"/>
+
+       <ImageButton
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+           android:background="@android:color/transparent"
+           android:layout_alignParentEnd="true"
+           android:layout_marginTop="20dp"
+           android:id="@+id/imgbtnOrder"/>
+
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="60dp"
+           android:id="@+id/contact"
+           android:text="Liên hệ"
+           android:textSize="25sp"
+           android:padding="10dp"
+           android:paddingLeft="10dp"
+           android:layout_below="@+id/order"
+           android:layout_marginTop="470dp"
+           android:background="@drawable/border_listview"/>
+       <ImageButton
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+           android:background="@android:color/transparent"
+           android:layout_below="@+id/order"
+           android:layout_marginTop="490dp"
+           android:layout_alignParentEnd="true"
+           android:layout_marginBottom="20dp"
+           android:id="@+id/imgbtnContact"/>
+
+
+   </RelativeLayout>
+
 
 </FrameLayout>
