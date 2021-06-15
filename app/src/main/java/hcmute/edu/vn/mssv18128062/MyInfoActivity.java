@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,7 +40,7 @@ public class MyInfoActivity extends AppCompatActivity {
     EditText password;
     EditText phone;
     Button update;
-    TextView logOut;
+    Button close;
 
     int id;
     @Override
@@ -53,7 +54,9 @@ public class MyInfoActivity extends AppCompatActivity {
         password = (EditText)findViewById(R.id.password);
         phone = (EditText)findViewById(R.id.phone);
         update = (Button)findViewById(R.id.update_info);
-        logOut = (TextView) findViewById(R.id.log_out);
+        close = (Button) findViewById(R.id.log_out);
+        imageView = (ImageView)findViewById(R.id.img);
+        btnImg = (ImageButton)findViewById(R.id.btnimg);
 
         sharedPreferencesUser = getSharedPreferences("dataLogin", MODE_PRIVATE);
         db = new Database(this);
@@ -78,14 +81,13 @@ public class MyInfoActivity extends AppCompatActivity {
                 username.setText(user.getString(1));
                 password.setText(user.getString(2));
                 phone.setText(user.getString(5));
-                //byte[] img = user.getBlob(7);
-                //Bitmap bitmap = BitmapFactory.decodeByteArray(img, 0, img.length);
-                //imageView.setImageBitmap(bitmap);
+                byte[] img = user.getBlob(7);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(img, 0, img.length);
+                imageView.setImageBitmap(bitmap);
             }
         }
 
-        imageView = (ImageView)findViewById(R.id.img);
-        btnImg = (ImageButton)findViewById(R.id.btnimg);
+
 
         update.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +104,7 @@ public class MyInfoActivity extends AppCompatActivity {
                 byte[] image = byteArray.toByteArray();
 
                 db.insertUser(new User(id, usernameUpdate, passwordUpdate, emailUpdate, nameUpdate, phoneUpdate, 0, image));
+                Toast.makeText(getBaseContext(), "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                 SharedPreferences.Editor editor = sharedPreferencesUser.edit();
                 editor.putString("email", emailUpdate);
                 editor.putString("name", nameUpdate);
@@ -121,7 +124,14 @@ public class MyInfoActivity extends AppCompatActivity {
                 startActivityForResult(pickPhoto , 0);//one can be replaced with any action code
             }
         });
-
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
+                intent.putExtra("name", "home");
+                startActivity(intent);
+            }
+        });
 
 
     }

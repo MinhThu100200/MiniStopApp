@@ -32,7 +32,7 @@
             android:textColor="@color/white"
             android:textAppearance="?android:attr/textAppearanceLarge" />
         <EditText
-            android:id="@+id/tendangnhap"
+            android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -51,7 +51,7 @@
         android:weightSum="3">
 
         <EditText
-            android:id="@+id/matkhau"
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

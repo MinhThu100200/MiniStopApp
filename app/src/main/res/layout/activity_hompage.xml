@@ -19,7 +19,6 @@
         app:layout_constraintTop_toTopOf="@+id/toolbar"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp">
-
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

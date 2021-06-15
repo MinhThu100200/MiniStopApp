@@ -4,6 +4,8 @@ package hcmute.edu.vn.mssv18128062;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
@@ -11,6 +13,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Shader;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,6 +23,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.ByteArrayOutputStream;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,12 +34,22 @@ import java.io.File;
 import java.io.IOException;
 
 import android.graphics.Matrix;
+import android.widget.Toast;
+
 public class SignUpActivity extends AppCompatActivity {
 
     TextView txtLogin;
     Button btnChoose, btnTakePhoto;
     ImageView imageView;
-    EditText txtUsername;
+    EditText name;
+    EditText email;
+    EditText username;
+    EditText password;
+    EditText phone;
+    Button signUp;
+    private SQLiteDatabase sqLiteDatabase;
+    SharedPreferences sharedPreferencesUser;
+    private Database db;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,9 +60,17 @@ public class SignUpActivity extends AppCompatActivity {
         btnChoose = (Button)findViewById(R.id.btnChoose);
         btnTakePhoto = (Button)findViewById(R.id.btnTakePhoto);
         imageView = (ImageView)findViewById(R.id.imageView);
-
+        name = (EditText)findViewById(R.id.name);
+        email = (EditText)findViewById(R.id.email);
+        username = (EditText)findViewById(R.id.username);
+        password = (EditText)findViewById(R.id.password);
+        phone = (EditText)findViewById(R.id.phone);
+        signUp = (Button)findViewById(R.id.btnSignUp);
         //int iamge = R.drawable.ch;
         //imageView.setImageResource(iamge);
+        sharedPreferencesUser = getSharedPreferences("dataLogin", MODE_PRIVATE);
+        db = new Database(this);
+        sqLiteDatabase = db.getReadableDatabase();
         txtLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +102,25 @@ public class SignUpActivity extends AppCompatActivity {
                 }
 
 
+            }
+        });
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String usernameAdd = username.getText().toString().trim();
+                String passwordAdd = password.getText().toString().trim();
+                String emailAdd = email.getText().toString().trim();
+                String nameAdd = name.getText().toString().trim();
+                String phoneAdd = phone.getText().toString().trim();
+                BitmapDrawable bitmapDrawable = (BitmapDrawable) imageView.getDrawable();
+                Bitmap bitmap = bitmapDrawable.getBitmap();
+                ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArray);
+                byte[] image = byteArray.toByteArray();
+                db.insertUser(new User(usernameAdd, passwordAdd, emailAdd, nameAdd, phoneAdd, 0, image));
+                Toast.makeText(getBaseContext(), "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
             }
         });
 

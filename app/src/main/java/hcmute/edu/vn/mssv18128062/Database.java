@@ -414,13 +414,13 @@ public class Database extends SQLiteOpenHelper {
     }
 
     //notification
-    public void insertNotification(String name, int imgId){
+    public void insertNotification(String info, int imgId){
         SQLiteDatabase db = this.getWritableDatabase();
         String sql = "INSERT INTO NOTIFICATION VALUES(NULL, ?, ?)";
         SQLiteStatement statement = db.compileStatement(sql);
         statement.clearBindings();
 
-        statement.bindString(1, name);
+        statement.bindString(1, info);
         statement.bindDouble(2, imgId);
 
         statement.executeInsert();

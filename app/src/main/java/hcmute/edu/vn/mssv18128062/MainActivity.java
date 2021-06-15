@@ -15,6 +15,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferencesUser;
     SharedPreferences sharedPreferencesCart;
     private GoogleSignInClient mGoogleSignInClient;
-
+    EditText usernameLogin;
+    EditText passwordLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,38 +72,40 @@ public class MainActivity extends AppCompatActivity {
         db.QueryData("CREATE TABLE IF NOT EXISTS ORDERS( ID INTEGER PRIMARY KEY AUTOINCREMENT, ID_PRODUCT INTEGER, PRICE FLOAT, AMOUNT_PRODUCT INTEGER, " +
              "ID_BOOKED INTEGER)");
 
-        db.QueryData("CREATE TABLE IF NOT EXISTS NOTIFICATION( ID, INFOMATION, IMAGE_ID)");
+        db.QueryData("CREATE TABLE IF NOT EXISTS NOTIFICATION( ID INTEGER PRIMARY KEY AUTOINCREMENT, INFOMATION TEXT, IMAGE_ID INTEGER)");
 
 
-
-        db.insertAddress("2/5 đường 68 phường Hiệp Phú Quận 9 tp.Thủ Đức", R.drawable.ch1);
-        db.insertAddress("33 Lê Văn Việt phường Hiệp Phú quận 9 tp.Thủ Đức", R.drawable.ch2);
-        db.insertAddress("90 Võ Văn Ngân phường Hiệp Phú quận Thủ Đức tp.Thủ Đức", R.drawable.ch3);
-        db.insertAddress("88 Nguyễn Tri Phương phường 3 quận 6 tp.Trà Vinh", R.drawable.ch4);
-        db.insertAddress("12 Nguyễn Đình Chiểu phường 3 quận 6 tp.Trà Vinh", R.drawable.ch5);
+        //int idImg = R.drawable.welcome;
+        //String des = "Chào mừng tình yêu đã đến đồng hành cùng mình nè. Love u <3 !!!";
+        //db.insertNotification(des, idImg);
+        //db.insertAddress("2/5 đường 68 phường Hiệp Phú Quận 9 tp.Thủ Đức", R.drawable.ch1);
+        //db.insertAddress("33 Lê Văn Việt phường Hiệp Phú quận 9 tp.Thủ Đức", R.drawable.ch2);
+        //db.insertAddress("90 Võ Văn Ngân phường Hiệp Phú quận Thủ Đức tp.Thủ Đức", R.drawable.ch3);
+        //db.insertAddress("88 Nguyễn Tri Phương phường 3 quận 6 tp.Trà Vinh", R.drawable.ch4);
+        //db.insertAddress("12 Nguyễn Đình Chiểu phường 3 quận 6 tp.Trà Vinh", R.drawable.ch5);
          //1
-        db.insertCategory("Mỳ cay", R.drawable.spicy);
-        db.insertProduct("Mỳ cay hải sản", 40000, "Hương vị đê mê cho tín đồ mỳ cay, với độ cay xé lưỡi sẽ kích thích vị giác của bạn", 1, R.drawable.spicy);
+        //db.insertCategory("Mỳ cay", R.drawable.spicy);
+        //db.insertProduct("Mỳ cay hải sản", 40000, "Hương vị đê mê cho tín đồ mỳ cay, với độ cay xé lưỡi sẽ kích thích vị giác của bạn", 1, R.drawable.spicy);
          //2
-        db.insertCategory("Đồ uống", R.drawable.drink);
-        db.insertProduct("Nước cam", 30000, "Nước cam 100% cam tươi cung cấp vitamin C cho bạn khỏe mạnh", 2, R.drawable.organe);
-        db.insertProduct("Nước cam cà rốt", 50000, "Nước trái cây mix, xịn khỏi chê luôn đó nha..Thử nhanh nào khách iu ơi!", 2, R.drawable.organ_carrot);
+        //db.insertCategory("Đồ uống", R.drawable.drink);
+        //db.insertProduct("Nước cam", 30000, "Nước cam 100% cam tươi cung cấp vitamin C cho bạn khỏe mạnh", 2, R.drawable.organe);
+        //db.insertProduct("Nước cam cà rốt", 50000, "Nước trái cây mix, xịn khỏi chê luôn đó nha..Thử nhanh nào khách iu ơi!", 2, R.drawable.organ_carrot);
         //3
-        db.insertCategory("Cơm", R.drawable.com_ga);
-        db.insertProduct("Cơm gà", 45000, "Cơm gà được chế biến từ những con gà vườn thịt rắn chắc và mạnh mẽ, sẽ làm cho bạn ghiền đó", 3, R.drawable.com_ga);
+        //db.insertCategory("Cơm", R.drawable.com_ga);
+        //db.insertProduct("Cơm gà", 45000, "Cơm gà được chế biến từ những con gà vườn thịt rắn chắc và mạnh mẽ, sẽ làm cho bạn ghiền đó", 3, R.drawable.com_ga);
         //4
-        db.insertCategory("Kimbap", R.drawable.kimbap);
-        db.insertProduct("Kimbap truyền thống", 30000, "Với những hạt cơm dẻo dai được cuộn trong miếng rong biển vô cùng thơm ngon", 4, R.drawable.kimbap);
+        //db.insertCategory("Kimbap", R.drawable.kimbap);
+        //db.insertProduct("Kimbap truyền thống", 30000, "Với những hạt cơm dẻo dai được cuộn trong miếng rong biển vô cùng thơm ngon", 4, R.drawable.kimbap);
         //5
-        db.insertCategory("Salad", R.drawable.salad);
-        db.insertProduct("Salad trái cây", 60000, "Một món ăn healthy biết bao nè bạn yêu ơi~", 5, R.drawable.salad);
+        //db.insertCategory("Salad", R.drawable.salad);
+        //db.insertProduct("Salad trái cây", 60000, "Một món ăn healthy biết bao nè bạn yêu ơi~", 5, R.drawable.salad);
         //6
-        db.insertCategory("Đồ tây", R.drawable.sandwich);
-        db.insertProduct("Sandwich", 30000, "Bắt đầu buổi sáng với một miếng sandwich nóng hỏi thì tuyệt vời lắm đó!", 6, R.drawable.sandwich);
-        db.insertProduct("Mý ý", 60000, "Một đĩa mỳ ý khiến đôi uyên ương càng ưng ý ngại gì không thử nè~", 6, R.drawable.my_y);
+        //db.insertCategory("Đồ tây", R.drawable.sandwich);
+        //db.insertProduct("Sandwich", 30000, "Bắt đầu buổi sáng với một miếng sandwich nóng hỏi thì tuyệt vời lắm đó!", 6, R.drawable.sandwich);
+        //db.insertProduct("Mý ý", 60000, "Một đĩa mỳ ý khiến đôi uyên ương càng ưng ý ngại gì không thử nè~", 6, R.drawable.my_y);
         //7
-        db.insertCategory("Chả chiên", R.drawable.cha_chien);
-        db.insertProduct("Chả chiên", 30000, "Nóng hỏi vừa thổi vừa ăn nè~", 7, R.drawable.cha_chien);
+        //db.insertCategory("Chả chiên", R.drawable.cha_chien);
+        //db.insertProduct("Chả chiên", 30000, "Nóng hỏi vừa thổi vừa ăn nè~", 7, R.drawable.cha_chien);
 
 
         sharedPreferencesCart = getSharedPreferences("dataCart", MODE_PRIVATE);
@@ -111,7 +115,9 @@ public class MainActivity extends AppCompatActivity {
 
         txtSignUp = (TextView) findViewById(R.id.txtSingUp);
         txtFogotPass = (TextView) findViewById(R.id.txtForgotPass);
-
+        login = (Button)findViewById(R.id.btnLogin);
+        usernameLogin = (EditText)findViewById(R.id.username);
+        passwordLogin = (EditText)findViewById(R.id.password);
         //yeu cau nguoi dung cung cap ten
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -154,6 +160,37 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new  Intent(getBaseContext(), ForgotPassActivity.class);
                 startActivity(intent);
+            }
+        });
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String username = usernameLogin.getText().toString().trim();
+                String password = passwordLogin.getText().toString().trim();
+                if(username.equals("") || password.equals("")){
+                    Toast.makeText(getBaseContext(), "Nhập tên đăng nhập và password luôn bạn iu <3 ơi!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    String query = "SELECT * FROM USERS";
+                    Cursor cursor = db.GetData(query);
+                    while (cursor.moveToNext()){
+                        if(cursor.getString(1).equals(username) && cursor.getString(2).equals(password)){
+                            Toast.makeText(getBaseContext(), "Đăng nhập thành công rồi nè!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
+                            startActivity(intent);
+                            sharedPreferencesUser = getSharedPreferences("dataLogin", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferencesUser.edit();
+                            editor.putString("username", username);
+                            editor.putString("password", password);
+                            editor.putString("name", cursor.getString(4));
+                            editor.putString("email", cursor.getString(3));
+                            editor.putString("phone", cursor.getString(5));
+                            editor.putInt("id", cursor.getInt(0));
+                            editor.commit();
+                            break;
+                        }
+                    }
+                }
             }
         });
     }
