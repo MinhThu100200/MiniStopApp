@@ -1,10 +1,13 @@
 package hcmute.edu.vn.mssv18128062;
 
+import android.animation.Animator;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -81,6 +84,8 @@ public class FoodAdapter extends ArrayAdapter {
         holder.txtAmount.setText(""+ count);
         holder.ratingBar.setRating(rating);
 
+        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.scale_list);
+        convertView.startAnimation(animation);
         return convertView;
     }
     //filter

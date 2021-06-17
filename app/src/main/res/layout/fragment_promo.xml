@@ -7,6 +7,28 @@
     tools:context=".PromoFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/discount"></ImageView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:id="@+id/text"
+            android:layout_below="@+id/image"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textSize="30dp"
+            android:textStyle="italic"
+            android:textColor="@color/teal_700"
+            android:text="Hiện chưa có Chương trình ưu đãi"></TextView>
+
+    </RelativeLayout>
+
 
 
 </FrameLayout>

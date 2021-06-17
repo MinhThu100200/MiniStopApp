@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -73,6 +75,9 @@ public class OrderAdapter extends ArrayAdapter {
         //byte[] image = addressStore.get_picture();
         ///Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
         //holder.imageViewFood.setImageBitmap(bitmap);
+
+        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.scale_list);
+        convertView.startAnimation(animation);
         return convertView;
     }
 }

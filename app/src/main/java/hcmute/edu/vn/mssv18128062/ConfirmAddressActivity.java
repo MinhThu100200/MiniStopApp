@@ -84,7 +84,7 @@ public class ConfirmAddressActivity extends AppCompatActivity {
 
         lvFood.setAdapter(cartAdapter);
 
-        String total = "" + sharedPreferencesCart.getFloat("total", 0);
+        String total = "Tổng: " + sharedPreferencesCart.getFloat("total", 0) + " VND";
         txtTotal.setText(total);
         //
         cart = (ImageButton)findViewById(R.id.cart);
@@ -183,12 +183,18 @@ public class ConfirmAddressActivity extends AppCompatActivity {
                                 int id = user.getInt(0);
                                 int totalPoint = user.getInt(6) + point;
                                 db.QueryData("UPDATE USERS SET POINT='"+totalPoint+"' WHERE ID=" + id +"");
+                                editorUser.putInt("point", totalPoint);
+                                editor.commit();
+                                break;
                             }
                         }
                     }
                     else{
                         int id = sharedPreferencesUser.getInt("id", -1);
-                        db.updateUserPoint(point, id);
+                        int totalPoint = sharedPreferencesUser.getInt("point", 0) + point;
+                        db.QueryData("UPDATE USERS SET POINT='"+totalPoint+"' WHERE ID=" + id +"");
+                        editorUser.putInt("point", totalPoint);
+                        editor.commit();
                     }
                     editor.putFloat("total", 0);
                     editor.commit();

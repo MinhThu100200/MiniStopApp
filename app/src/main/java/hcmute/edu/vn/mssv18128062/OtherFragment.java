@@ -81,7 +81,11 @@ public class OtherFragment extends Fragment {
         contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent si = new Intent(Intent.ACTION_SEND);
+                si.setType("message/rfc822");
+                si.putExtra(Intent.EXTRA_EMAIL, new String[]{"storemint450@gmail.com"});
+                si.putExtra(Intent.EXTRA_SUBJECT, "PHẢN HỒI CỦA KHÁCH HÀNG");
+                startActivity(Intent.createChooser(si,"Choose Mail App"));
             }
         });
 

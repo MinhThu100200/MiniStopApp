@@ -72,12 +72,16 @@ public class MainActivity extends AppCompatActivity {
         db.QueryData("CREATE TABLE IF NOT EXISTS ORDERS( ID INTEGER PRIMARY KEY AUTOINCREMENT, ID_PRODUCT INTEGER, PRICE FLOAT, AMOUNT_PRODUCT INTEGER, " +
              "ID_BOOKED INTEGER)");
 
-        db.QueryData("CREATE TABLE IF NOT EXISTS NOTIFICATION( ID INTEGER PRIMARY KEY AUTOINCREMENT, INFOMATION TEXT, IMAGE_ID INTEGER)");
+        db.QueryData("CREATE TABLE IF NOT EXISTS NOTIFICATION( ID INTEGER PRIMARY KEY AUTOINCREMENT, TITLE TEXT, INFOMATION TEXT, IMAGE_ID INTEGER)");
 
 
         //int idImg = R.drawable.welcome;
-        //String des = "Chào mừng tình yêu đã đến đồng hành cùng mình nè. Love u <3 !!!";
-        //db.insertNotification(des, idImg);
+        //String des = "Chào mừng tình yêu đã đến đồng hành cùng mình nè. Love u 3000 !!!";
+        //db.insertNotification("Welcome!!!", des, idImg);
+        //int idImg1 = R.drawable.info;
+        //String info = "Sắp tới sẽ có rất nhiều chương trình ưu đãi hấp dẫn cho các khách hàng thân yêu. Cửa hàng sẽ thông báo sớm nhất để anh chị em mình tham gia ạ. Cảm ơn anh chị rất nhiều vì đã dồng hàng đến giờ phút này ạ";
+        //db.insertNotification("Sự kiện sắp tới", info, idImg1);
+
         //db.insertAddress("2/5 đường 68 phường Hiệp Phú Quận 9 tp.Thủ Đức", R.drawable.ch1);
         //db.insertAddress("33 Lê Văn Việt phường Hiệp Phú quận 9 tp.Thủ Đức", R.drawable.ch2);
         //db.insertAddress("90 Võ Văn Ngân phường Hiệp Phú quận Thủ Đức tp.Thủ Đức", R.drawable.ch3);
@@ -90,6 +94,16 @@ public class MainActivity extends AppCompatActivity {
         //db.insertCategory("Đồ uống", R.drawable.drink);
         //db.insertProduct("Nước cam", 30000, "Nước cam 100% cam tươi cung cấp vitamin C cho bạn khỏe mạnh", 2, R.drawable.organe);
         //db.insertProduct("Nước cam cà rốt", 50000, "Nước trái cây mix, xịn khỏi chê luôn đó nha..Thử nhanh nào khách iu ơi!", 2, R.drawable.organ_carrot);
+        //db.insertProduct("Nước ép táo", 45000, "Nước ép táo, với 100% táo nhập từ Mỹ sẽ giúp bạn cảm thấy sảng khoái đó nhe!!!!!", 2, R.drawable.apple);
+        //db.insertProduct("Bạc sĩu", 30000, "Với những bạn muốn uống cà phê mà sợ đắng thì bạc sĩu là một lựa chọn thích hợp và tuyệt vời.", 2, R.drawable.bacsiu);
+        //db.insertProduct("Sinh tố bơ", 40000, "Một ly sinh tố bơ sẽ giúp bạn cảm thấy haizzz hôm nay ngọt vậy là đủ tuyệt cú mèo luôn nè!!", 2, R.drawable.bo);
+        //db.insertProduct("Nước ép cà chua", 35000, "Nếu một ngày buồn bã thất tình thay vì khóc sự lựa chọn tuyệt vời của bạn là một ly nước ép cà chua để mình sáng mắt ra nè. Đừng buồn nhe!!!!", 2, R.drawable.cachua);
+
+        //db.insertProduct("Nước ép dưa hấu", 45000, "Nói các bạn biết giống dưa này mình lấy từ dưa con cháu của giống dưa của Mai An Tiêm, đảm bảo uống vô nhớ luôn lịch sử!!!", 2, R.drawable.duahau);
+        //db.insertProduct("Sinh tố mít", 45000, "Nếu đang stress mình nghĩ lựa thêm tý đường cho cuộc sống là vô cùng hợp lý và sinh tố mít rất hân hạnh phục vỵ bạn iu nè <3", 2, R.drawable.mit);
+
+        //db.insertProduct("Cà phê", 30000, "Cà phê học theo StartBuck dành cho mấy đỗ nghèo khỉ muốn thử nè!!", 2, R.drawable.soda);
+
         //3
         //db.insertCategory("Cơm", R.drawable.com_ga);
         //db.insertProduct("Cơm gà", 45000, "Cơm gà được chế biến từ những con gà vườn thịt rắn chắc và mạnh mẽ, sẽ làm cho bạn ghiền đó", 3, R.drawable.com_ga);
@@ -186,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
                             editor.putString("email", cursor.getString(3));
                             editor.putString("phone", cursor.getString(5));
                             editor.putInt("id", cursor.getInt(0));
+                            editor.putInt("point", cursor.getInt(6));
                             editor.commit();
                             break;
                         }
@@ -229,16 +244,21 @@ public class MainActivity extends AppCompatActivity {
             byte[] image = byteArray.toByteArray();
              sharedPreferencesUser = getSharedPreferences("dataLogin", MODE_PRIVATE);
              SharedPreferences.Editor editor = sharedPreferencesUser.edit();
-             editor.putString("name", personName);
-             editor.putString("email", personEmail);
-            //editor.put
-             editor.commit();
+
              int flag = 0;
             Cursor user = db.GetData("SELECT * FROM USERS");
             while(user.moveToNext()){
                 if(user.getString(3).equals(personEmail))
                 {
                    flag = 1;
+                    editor.putString("username", user.getString(1));
+                    editor.putString("password", user.getString(2));
+                    editor.putString("name", user.getString(4));
+                    editor.putString("email", user.getString(3));
+                    editor.putString("phone", user.getString(5));
+                    editor.putInt("id", user.getInt(0));
+                    editor.putInt("point", user.getInt(6));
+                    editor.commit();
                    break;
 
                 }
@@ -246,6 +266,9 @@ public class MainActivity extends AppCompatActivity {
             if(flag == 0)
             {
                 db.insertUser(new User("", "", personEmail, personName, "", 0, image));
+                editor.putString("name", personName);
+                editor.putString("email", personEmail);
+                editor.commit();
             }
 
              Intent intent = new  Intent(getBaseContext(), HomePageActivity.class);

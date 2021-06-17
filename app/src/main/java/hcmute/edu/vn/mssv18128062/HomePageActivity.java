@@ -2,6 +2,7 @@ package hcmute.edu.vn.mssv18128062;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -28,6 +29,7 @@ public class HomePageActivity extends AppCompatActivity {
     ImageButton cart;
     ImageButton notification;
     BottomNavigationView bottomNavigationView;
+    SharedPreferences sharedPreferencesUser;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +38,25 @@ public class HomePageActivity extends AppCompatActivity {
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(selectedListener);
         //
+
+        // set Fragmentclass Arguments
+
+        sharedPreferencesUser = getSharedPreferences("dataLogin", MODE_MULTI_PROCESS);
         textView = (TextView)findViewById(R.id.titleFrag);
         textView.setText("Home");
         HomeFragment fragment = new HomeFragment();
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.container,fragment,"");
         fragmentTransaction.commit();
+
+        Bundle bundle = new Bundle();
+        int point = sharedPreferencesUser.getInt("point", 0);
+        bundle.putInt("point", point);
+        PointFragment fragment3 = new PointFragment();
+        FragmentTransaction fragmentTransaction3 = getSupportFragmentManager().beginTransaction();
+        //fragmentTransaction3.replace(R.id.container, fragment3);
+        fragment3.setArguments(bundle);
+        fragmentTransaction3.commit();
         //
         Intent intent = getIntent();
         String name = getIntent().getStringExtra("name");
@@ -147,9 +162,13 @@ public class HomePageActivity extends AppCompatActivity {
 
                 case R.id.navigation_points:
                     textView.setText("Points");
+                    Bundle bundle = new Bundle();
+                    int point = sharedPreferencesUser.getInt("point", 0);
+                    bundle.putInt("point", point);
                     PointFragment fragment3 = new PointFragment();
                     FragmentTransaction fragmentTransaction3 = getSupportFragmentManager().beginTransaction();
                     fragmentTransaction3.replace(R.id.container, fragment3);
+                    fragment3.setArguments(bundle);
                     fragmentTransaction3.commit();
                     return true;
 

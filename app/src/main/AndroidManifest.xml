@@ -26,10 +26,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyProject">
-
         <activity
             android:name=".MainActivity"
-            android:label="@string/activity_login"
+            android:label="Mint Store"
             android:theme="@style/noTitle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -66,7 +65,9 @@
         <activity
             android:name=".CartActivity"
             android:theme="@style/noTitle" />
-        <activity android:name=".NotificationActivity" />
+        <activity
+            android:name=".NotificationActivity"
+            android:theme="@style/noTitle" />
         <activity
             android:name=".FoodActivity"
             android:theme="@style/noTitle" />
@@ -85,8 +86,12 @@
         <activity
             android:name=".OrderActivity"
             android:theme="@style/noTitle" />
-        <activity android:name=".OrderDetailActivity"
-            android:theme="@style/noTitle"></activity>
+        <activity
+            android:name=".OrderDetailActivity"
+            android:theme="@style/noTitle" />
+        <activity
+            android:name=".NotificationDetailActivity"
+            android:theme="@style/noTitle" />
     </application>
 
 </manifest>

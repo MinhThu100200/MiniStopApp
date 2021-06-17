@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@drawable/border_listview">
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/imageViewCustome"
+            android:src="@drawable/notification"
+            ></ImageView>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="25dp"
+                android:text="Thông báo"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:id="@+id/nameStore"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                ></TextView>
+            <TextView
+                android:layout_below="@id/nameStore"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="15dp"
+                android:text="kimpap"
+                android:id="@+id/titleNoti"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>

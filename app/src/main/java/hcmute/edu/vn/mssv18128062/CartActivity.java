@@ -150,6 +150,11 @@ public class CartActivity extends AppCompatActivity {
                     intentBack.putExtra("name", "cart");
                     startActivity(intentBack);
                 }
+                else if(name.equals("noti")){
+                    Intent intentBack = new Intent(getApplicationContext(), NotificationActivity.class);
+                    intentBack.putExtra("name", "noti");
+                    startActivity(intentBack);
+                }
                 else {
                     Intent intentBack = new Intent(getApplicationContext(), CartActivity.class);
                     startActivity(intentBack);

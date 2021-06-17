@@ -3,10 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_200"
     tools:context=".PointFragment">
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ImageView
             android:id="@+id/img"
@@ -36,6 +35,7 @@
             android:textColor="#fff"
             android:layout_below="@id/point"
             android:layout_centerHorizontal="true"
+            android:hint="Chức năng hiện đang hoàn thiện. Thông cảm cho bé Mint ạ!"
             android:text="Đổi điểm"
             android:background="@drawable/boder_button"/>
     </RelativeLayout>

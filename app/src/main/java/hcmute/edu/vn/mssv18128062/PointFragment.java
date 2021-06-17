@@ -1,5 +1,6 @@
 package hcmute.edu.vn.mssv18128062;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,6 +53,7 @@ public class PointFragment extends Fragment {
 
     TextView point;
     Button exchange;
+    SharedPreferences sharedPreferencesUser;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,9 +70,18 @@ public class PointFragment extends Fragment {
         // Inflate the layout for this fragment
         point = (TextView)rootView.findViewById(R.id.point);
         exchange = (Button)rootView.findViewById(R.id.exchange);
+        //sharedPreferencesUser = getSharedPreferences("dataLogin", MODE_MULTI_PROCESS);
 
+        int pointUser = getArguments().getInt("point");
+        String points = "" + pointUser;
+        point.setText(points);
+        exchange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), points, Toast.LENGTH_SHORT).show();
 
-
+            }
+        });
         return rootView;
     }
 }
